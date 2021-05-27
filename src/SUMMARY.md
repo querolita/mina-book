@@ -13,5 +13,6 @@
     + [Arithmetic circuits to constraint systems]()
     + [Constraint systems to polynomials]()
     + [polynomial commitments](./crypto/plonk/polynomial_commitments.md)
+        * [proof](./crypto/plonk/proof.md)
 - [Pickles](./crypto/pickles.md)
 - [Pasta Curves](./crypto/pasta_curves.md)
