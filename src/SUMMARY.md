@@ -1,18 +1,28 @@
-# Code Base
-
-- [OCaml](./codebase/ocaml.md)
-
-# Cryptography
+# Summary
 
 - [Overview](./crypto/overview.md)
+# Mina PLONK
+
++ [Overview](./crypto/plonk/overview.md)
++ [Commitments](./crypto/plonk/commitments.md)
++ [Program to arithmetic circuits]()
++ [Arithmetic circuits to constraint systems]()
++ [Constraint systems to polynomials]()
++ [Polynomial commitments](./crypto/plonk/polynomial_commitments.md)
+    * [Inner product argument](./crypto/plonk/inner_product.md)
+    * [Compressing polynomial commitments](./crypto/plonk/proof.md)
++ [Non-interaction with fiat-shamir](./crypto/plonk/fiat_shamir.md)
++ [Full Protocol](./crypto/plonk/protocol.md)
+
+# Instantiations
+
 - [Poseidon hash](./crypto/poseidon.md)
-- [PLONK](./crypto/plonk.md)
-    + [Overview](./crypto/plonk/overview.md)
-    + [Program to arithmetic circuits](./crypto/plonk/arithmetic_circuits.md)
-        * [Snarky](./crypto/snarky.md)
-    + [Arithmetic circuits to constraint systems]()
-    + [Constraint systems to polynomials]()
-    + [polynomial commitments](./crypto/plonk/polynomial_commitments.md)
-        * [proof](./crypto/plonk/proof.md)
-- [Pickles](./crypto/pickles.md)
 - [Pasta Curves](./crypto/pasta_curves.md)
+
+# Recursion
+
+- [Pickles](./crypto/pickles.md)
+
+# Tooling
+
+- [Snarky](./crypto/snarky.md)

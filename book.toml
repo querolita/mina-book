@@ -6,3 +6,7 @@ src = "src"
 title = "Mina Protocol"
 
 [preprocessor.katex]
+
+[output.html]
+curly-quotes = true
+git-repository-url = "https://www.github.com/mimoo/minaprotocol"

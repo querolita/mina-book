@@ -1,5 +1,7 @@
 # Compressing point equality proofs of multiple polynomials
 
+TODO: What's a good name for this? linearization? compressions of statements? aggregating polynomial commitments?
+
 **Re-write this, as it should work over a set of points $H$**.
 
 Given a set of functions $f_1, \cdots, f_k$ over a field $\mathbb{F}$, we want to show that they all evaluates to $0$ for some point $h$. In other words:
@@ -22,5 +24,10 @@ Claim: the probability that $\tilde{f} = 0$ while there's some $f_i(h) \neq 0$ i
 1. Assume that $\exists i$ such that $f_i(h) \neq 0$.
 1. From the previous step, $\tilde{f}(x)$ is a non-zero polynomial that evaluates to $0$ for some random point $\alpha$.
 1. The probability that $\tilde{f}$ is not the zero-polynomial and that it evaluates to $0$ for some random point $\alpha$ is $deg(\tilde{f}) / |\mathbb{F}|$.
+    1. $\tilde{f}$ has degree $l$ so it can have at most $l$ roots.
+    1. $\tilde{f}(\alpha) = 0$ means $\alpha$ is a root.
     1. TODO: Schwartz–Zippel lemma
+    1. so the probability that a random $\alpha$ is a root is negligible.
 1. So $\tilde{f}$ is the zero polynomial with overwhelming probability.
+
+Of course the prover can't choose $\alpha$ themselves otherwise they can simply pick a root.
