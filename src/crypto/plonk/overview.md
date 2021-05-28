@@ -17,4 +17,8 @@ note that the prover can't be faster than linear, as they at least have to read 
 in the rest:
 
 - we will define every tool needed
-- everything will be used in the final protocol section
+- the whole point is to go from program -> arithmetic circuit -> constraints -> polynomials, as polynomials are what we can prove later
+- then we will explain how polynomial commitments work and how we can prove things succintly (to some extent) with them.
+- everything will be used in the final protocol section that describes our variant of PLONK.
+
+TODO: what are the new parts in our variants? What are the removed parts?
