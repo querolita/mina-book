@@ -29,3 +29,7 @@
 # Tooling
 
 - [Snarky](./crypto/snarky.md)
+
+# Consensus
+
+- [Consensus](.crypto/consensus.md)

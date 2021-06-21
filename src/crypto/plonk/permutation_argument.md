@@ -14,15 +14,17 @@ Copy constraints can be reduced to show that:
 
 $$ assignments = permutation(assignments) $$
 
-That is, if $a_1$ must be equal to $b_2$ we would want to show that these two ordered sets (is ordered set the right term?) are equal:
+That is, if $a_1$ must be equal to $b_2$ we would want to show that these two vectors are equal:
 
 $$ (a_1, a_2, b_1, b_2, c_1, c_2) = (b_2, a_2, b_1, a_1, c_1, c_2) $$
 
 To be more formal, we can write the permutation as:
 
-$$ \sigma = (a_1 b_2) $$
+$$ \sigma = (1 4) $$
 
 ## Permutation to an accumulator
+
+(see Bayer-Groth 12 - permutation checks with products)
 
 As usual, the end goal is to reduce our constraint to a polynomial, so that we can prove it using our polynomial commitment techniques.
 
@@ -128,6 +130,9 @@ acc_i = acc_{i-1} (\frac{(a_i + \beta \omega^{i-1} + \gamma)(b_i + \beta k_1 \om
 \end{cases}
 $$
 
+- $\beta$ is to ensure that the multiset are the same ($(1, 2, 3, 1)$ is the same as $(2, 1, 3, 1)$)
+- $\gamma$ is to ensure that the products of all the elements are the same (1*2*3*1 same as 2*1*3*1)
+- what ensures that the wiring is the same o_O?
 
 ## Accumulator to polynomial
 

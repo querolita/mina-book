@@ -1,33 +1,53 @@
 # Compressing point equality proofs of multiple polynomials
 
-TODO: What's a good name for this? linearization? compressions of statements? aggregating polynomial commitments?
+TODO: What's a good name for this? linearization? compressions of statements? aggregating polynomial commitments? batching polynomial proofs?
 
-**Re-write this, as it should work over a set of points $H$**.
+Given a set of functions $f_1, \cdots, f_k$ over a field $\mathbb{F}$, we want to show that they all evaluates to $0$ for a set of points $h \in H$. In other words:
 
-Given a set of functions $f_1, \cdots, f_k$ over a field $\mathbb{F}$, we want to show that they all evaluates to $0$ for some point $h$. In other words:
-
-$$ \text{for some } h \in \mathbb{F}, f_i(h) = 0 \; \forall i \in [[1,k]] $$
+$$ \mathbb{F}, f_i(h) = 0 \; \forall i \in [[1,k]] \text{ and } \forall h \in H$$
 
 We could send all the polynomials, and then evaluate them, but that could be a lot of polynomials to send.
 Instead, we can compress that statement into showing that a single polynomial is equal to zero.
-(TODO: To prove that a polynomial is equal to zero, there's a different technique.)
 
-The reduction is to show that the following polynomial $\tilde{f}$ is equal to $0$ at some random point $\alpha \leftarrow \mathbb{F}$:
+To prove that a single polynomial is equal to zero over some set, there's a technique (TODO: name? reference?): construct the target polynomial $Z_H(x) = (x - h_1) \cdot \cdots \cdot (x-h_n)$ which has the points of $H$ as roots.
+Then show that our polynomial can be divided by this target polynomial.
 
-$$ \tilde{f}(x) = f_1(h) + f_2(h) x + f_3(h) x^2 + \cdots + f_k(h) x^{k-1} $$
+But this does not reduce the size of our proof at all, instead we can show that on a random point.
+Here's the proof that showing it on a random point suffices, that is if $\mathbb{F}$ is a large enough field.
 
-Claim: the probability that $\tilde{f} = 0$ while there's some $f_i(h) \neq 0$ is negligible (if $\mathbb{F}$ is large and \tilde{f} is correctly constructed, that is).
+---
 
-**Proof**:
+Theorem:
 
-1. Assume that for some random $\alpha \in \mathbb{F}$ we have $\tilde{f}(\alpha) = 0$. We want to show that the probability that $P(\tilde{f}(\alpha) = 0 \text{ and } \exists i \text{ s.t. } f_i(h) \neq 0)$ is negligible.
-1. Assume that $\exists i$ such that $f_i(h) \neq 0$.
-1. From the previous step, $\tilde{f}(x)$ is a non-zero polynomial that evaluates to $0$ for some random point $\alpha$.
-1. The probability that $\tilde{f}$ is not the zero-polynomial and that it evaluates to $0$ for some random point $\alpha$ is $deg(\tilde{f}) / |\mathbb{F}|$.
-    1. $\tilde{f}$ has degree $l$ so it can have at most $l$ roots.
-    1. $\tilde{f}(\alpha) = 0$ means $\alpha$ is a root.
-    1. TODO: Schwartz–Zippel lemma
-    1. so the probability that a random $\alpha$ is a root is negligible.
-1. So $\tilde{f}$ is the zero polynomial with overwhelming probability.
+$$
+\begin{align*}
+&\text{Let } f(x,y) = \sum_{i=1}^{k}x^{i-1}f_i(y).\\
+&\text{If for some random } \alpha \leftarrow \mathbb{F}, \; Z_H(y) | f(\alpha, y) \; \forall y \in \mathbb{F},\\
+&\text{then } \forall i \in [[1,k]] \; Z | f_i \text{ with negligible probability } k/|\mathbb{F}|.
+\end{align*}
+$$
 
-Of course the prover can't choose $\alpha$ themselves otherwise they can simply pick a root.
+---
+
+Proof:
+
+We can prove the contraposite:
+
+$$
+\begin{align*}
+&\text{If } \exists i \text{ s.t. } Z \not{|} f_i \text{, then for a random } \alpha \leftarrow \mathbb{F},\\
+& Z(y) \not{|} f(\alpha, y) \; \forall y \in \mathbb{F} \text{ with overwhelming probability } 1 - k/|\mathbb{F}|
+\end{align*}
+$$
+
+So let's assume that there's an $i$ such that $Z$ does not divide $f_i$.
+
+This implies that there's a root $y_0$ such that $Z(y_0) = 0$ but $f_i(y_0) \neq 0$.
+
+This implies in turn that $f(x, y_0) = g(x) = \sum_{i=1}^{k}x^{i-1}f_i(y_0)$ is not the zero polynomial.
+
+Since $g$ is of degree $k$, it has at most $k$ roots.
+
+The probability of picking a random number $\alpha \leftarrow \mathbb{F}$ such that $g(\alpha) = 0$ is thus $k/|\mathbb{F}|$.
+
+QED.
