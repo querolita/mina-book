@@ -23,8 +23,8 @@ $$ f(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n $$
 * The prover has two vectors $\vec{a}$ and $\vec{b}$ of size $n$.
 * The prover and the verifier have pedersen hashes of the vectors $\vec{a}$ and $\vec{b}$: $\vec{a}\vec{G}$ and $\vec{b}\vec{H}$.
 * They also both have the, so-far unproven, inner product of $\vec{a}$ and $\vec{b}$: $z$.
-* Note that $\vec{G}$ is the vector of bases $(G_1, \cdots, G_n)$ (that have unknown discrete logarithm).
-* Note that the pedersen hash of $\vec{a}$ with base $\vec{G}$ is written as $\vec{a}\vec{G} = a_1G_1 + \cdots + a_nG_n$. You can think of that as a batching of pedersen commitments, with randomness $0$ (TODO: doesn't that mean the $a_i$ have to be uniformly random? TODO2: This is a pdersen hash, not a commitment, that we explain in another section)
+* Note that $\vec{G}$ is the vector of bases $(G_0, G_1, \cdots, G_n)$ (that have unknown discrete logarithm).
+* Note that the pedersen hash of $\vec{a}$ with base $\vec{G}$ is written as $\langle \vec{a}, \vec{G} \rangle = a_0G_0 + a_1G_1 + \cdots + a_nG_n$. You can think of that as a batching of pedersen commitments, with randomness $0$ (TODO: doesn't that mean the $a_i$ have to be uniformly random? TODO2: This is a pdersen hash, not a commitment, that we explain in another section)
 
 ## Note on notation
 
