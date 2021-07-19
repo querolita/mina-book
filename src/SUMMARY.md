@@ -14,6 +14,7 @@
 + [Polynomial commitments](./crypto/plonk/polynomial_commitments.md)
     * [Inner product argument](./crypto/plonk/inner_product.md)
     * [Compressing polynomial commitments](./crypto/plonk/proof.md)
+    * [Maller's optimization](./crypto/plonk/maller.md)
 + [Non-interaction with fiat-shamir](./crypto/plonk/fiat_shamir.md)
 + [Full Protocol](./crypto/plonk/protocol.md)
 
