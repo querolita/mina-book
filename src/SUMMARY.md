@@ -34,4 +34,4 @@
 
 # Consensus
 
-- [Consensus](.crypto/consensus.md)
+- [Consensus](./crypto/consensus.md)
