@@ -4,6 +4,7 @@
 # Mina PLONK
 
 + [Overview](./crypto/plonk/overview.md)
++ [Glossary](./crypto/plonk/glossary.md)
 + [Commitments](./crypto/plonk/commitments.md)
 + [Program to arithmetic circuits]()
 + [Arithmetic circuits to constraint systems]()

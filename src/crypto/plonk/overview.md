@@ -22,3 +22,7 @@ in the rest:
 - everything will be used in the final protocol section that describes our variant of PLONK.
 
 TODO: what are the new parts in our variants? What are the removed parts?
+
+## Stuff that needs to be written somewhere
+
+* you choose the domain size when creating the constraint system for a circuit. Thus, the domain size depends on the circuit you're using, not on the (pasta) curves.
