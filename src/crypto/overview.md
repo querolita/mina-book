@@ -1,6 +1,6 @@
 # Overview
 
-This is documentation of Mina's technology.
+This page documents [Mina](https://minaprotocol.com/)'s cryptographic backend.
 
 Authors: Izaak Meckler, Vanishree Rao, Matthew Ryan, Joseph Spadavecchia, David Wong
 

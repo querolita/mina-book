@@ -13,3 +13,9 @@ Since a field element is around 255-bit, a single field element is enough as the
     - https://github.com/minaprotocol/mina/blob/develop/src/nonconsensus/snark_params/snark_params_nonconsensus.ml
     - pickles: 
         + seems to rely on zexe code (https://www.youtube.com/watch?v=RItcNRChrzI&t=1732s)
+
+we currently have a few choices:
+
+* specify our own version
+* adhere to the [zcash poseidon spec](https://github.com/C2SP/C2SP/pull/3)
+* specify an extension of the zcash poseidon spec
