@@ -12,5 +12,5 @@ cargo install mdbook-katex
 Once you've installed these, you can simply run `mdbook` to serve the book:
 
 ```
-mdbook
+mdbook serve
 ```
