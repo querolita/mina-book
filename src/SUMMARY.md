@@ -21,7 +21,7 @@
 - [Polynomial commitments](./crypto/plonk/polynomial_commitments.md)
   - [Inner product argument](./crypto/plonk/inner_product.md)
   - [Different functionnalities](./crypto/plonk/inner_product_api.md)
-  - [Maller's optimization](./crypto/plonk/maller.md)
 - [Lagrange basis in multiplicative subgroups](./crypto/plonk/lagrange.md)
 - [Non-interaction with fiat-shamir](./crypto/plonk/fiat_shamir.md)
+- [Maller's optimization](./crypto/plonk/maller.md)
 - [Final check](./crypto/plonk/final_check.md)
