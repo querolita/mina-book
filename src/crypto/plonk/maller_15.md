@@ -97,3 +97,10 @@ Note right of Verifier: produces com(L_bar)
 Note right of Verifier: verifies the evaluation proof \n to check that L_bar(zeta) = 0
 ```
 -->
+
+## One last thing
+
+The prover actually does not send a commitment to the full $f$ polynomial. As described in the [last check section](final_check.md). This leaves us two options:
+
+1. Should we do the same here? This means that the verifier will have to compute the evaluation of $\bar L(\zeta)$ because it won't be zero.
+2. or should we compute a commitment of $\bar L$ using the full polynomial $f$? This means the verifier will have to do more effort when computing the commitment of $f$ (and thus of $\bar L$).
