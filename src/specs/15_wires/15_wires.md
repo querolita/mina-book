@@ -381,8 +381,7 @@ It performs the following:
       - (TODO: what about s_4?)
 13. Squeeze out the challenges $v$ and $u$.
 14. TODO: prev_challenges stuff
-15. TODO: combined_inner_product stuff (does this really belongs in oracles?)
-16. return the state of the fq_sponge, all the challenges, etc.
+15. return the state of the fq_sponge, all the challenges, etc.
 
 ### Protocol
 
@@ -418,38 +417,12 @@ Given:
 do:
 
 1. if the length of the proofs is 0, return true
-2. create params from proofs, for each proof as (index, lgr_comm, proof) do:
-    - compute public input commitment as `- proof.public[1] * L_1(x) - proof.public[2] * L_2(x) - ...`
-    - create a sponge and create all the challenges from it:
-        - oracles.beta/gamma: absorb the public and the witness commitments, then squeeze out oracles.beta and oracles.gamma
-        - oracles.alpha: absorb the z commitment (permutation commitment) and squeeze alpha_chal. Derive oracles.alpha from it (using endo_r)
-        - oracles.zeta: absorb padded t commitment, and squeeze zeta_chal. Derive oracles.zeta from it (using endo_r)
-        - fq_sponge: the state of the Fq sponge BEFORE the last evaluation
-        - digest: the squeeze of the Fq sponge AFTER the last evaluation
-        - create an fr_sponge and absorb the digest
-        - alpha: pre-compute the powers of oracles.alpha starting from alpha^2
-        - retrieve all the domain index for public
-        - p_eval: 
-            ```
-            [
-                [
-                (zeta^n - 1) * 
-                [-pub[0]/(n(zeta-1)) - pub[1]/(n(zeta - w)) - pub[2]/(n(zeta - w^2)) - ...] 
-                // are these really the lagrange polynomials? (zeta^n-1)/(n(zeta-X))
-                ],
-                [
-                    // same, but with zeta * w
-                ]
-            ]
-            ```
-        - absorb the (p_eval[i], proof.evals[i]) and squeeze out v_chal and u_chal. Derive oracles.v and oracles.u from them (using endo_r)
-        - ...
-        - evlp: [zeta^n, (zeta*w)^n] where n is the max_poly_size
-        - polys:
-        - zeta1:
-        - combined_inner_product:
-    - evals = take the proof evaluations of segments of l, f, etc. (proofs.evals[i]) and combine them with powers of z^n or (zw)^n (evlp[i]) // this will help linearize the rest
-    - compute the lineraization polynomial commitments required to check the opening proofs:
+2. enforce that each proof index has the sams SRS length (TODO: what is the fix here?)
+3. Check the f = t * Z_H equation for each proof (TODO: move this to a different function/section for easier testing/clarity). Ensure that $f(\zeta) = t(\zeta)Z_H(\zeta)$ (see the [final check](../../crypto/plonk/final_check.md) section) given the received evaluations of $f(\zeta)$ and $t\zeta$ and our own evaluation of $Z_H(\zeta)$.
+4. For each proof as `(index, proof)`, do:
+    - compute the public input commitment as $- public[1] \cdot L_1(x) - proof.public[2] \cdot L_2(x) - \cdots$ where $L_i$ are lagrange bases.
+    - run the [Oracles function](#oracles) to obtain all the challenges.
+    - compute the linearization polynomial commitment $com(f)$ required to check the opening proofs as the addition of the following polynomial commitments. For every chunked commitment, this means that they have to be recombined with the correct powers of $\zeta^n$ or $(\zeta\omega)^n$.
         - permutation
         - generic
         - poseidon
@@ -457,20 +430,13 @@ do:
         - EC doubling
         - endoscalar multiplication
         - scalar multiplication
-        - f
-    - check the linearization polynomial consistency (probably $f(z) = t(z)Z_H(z)$)
-        - $public(\zeta) = 0$ or the evaluation of the public polynomial at $\zeta$ if there's a public input
-        - $missing\_perm = (w[6](\zeta) + \gamma) \cdot z(\omega\zeta) \cdot \alpha^{PERM0} \cdot zkpm(\zeta) \cdot \sum_{i=0}^5 (\beta \cdot s[i](\zeta))  + witness[i] + \gamma$
-            // only involves the witness that are part of the permutation argument (7 of them)
-        - $missing\_perm2 = \alpha^{PERM0} \cdot zkpm(\zeta) \cdot z(\zeta) \cdot \sum_{i=0}^6 (\gamma + \beta \cdot \zeta \cdot shift[i] + w[i])$ // shift is for the cosets
-        - $left = [f(\zeta) + public(\zeta) - missing\_perm + missing\_perm2 - t(\zeta) \cdot (\zeta^n - 1)](\zeta - \omega^{n-3})(\zeta - 1)$
-        - $right = [(\zeta^n - 1) \cdot \alpha^{PERM1} \cdot (\zeta - \omega^{n-3}) + (\zeta^n - 1) \cdot \alpha^{PERM2} \cdot (\zeta - 1)] (1 - z(\zeta))$
-        
-        - ensure $left = right$
-    - check the aggregated opening proof
-    
-    [f(zeta) + pub(zeta) + permutation_stuff - t(zeta) * (zeta^n - 1)](zeta - w^{n-3})(zeta - 1)
-    
-    compare that with PLONK-3-wires:
-    
-    ![](https://i.imgur.com/NolFVxl.png)
+        - TODO: what about the public commitment?
+5. batch verify all the evaluation proofs (TODO: specify)
+<!-- 5. Now we should have:
+   1. p_eval -> public evaluation
+   2. p_comm -> public commitment
+   3. f_comm -> f commitment (without public?)
+   4. fq_sponge -> last evaluation of fq_sponge
+   5. oracles -> all the oracles stuff
+   6. polys -> recursion stuff
+->
