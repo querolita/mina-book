@@ -913,6 +913,13 @@ g. Scalar multiplication</li>
 <h1 id="custom-gates"><a class="header" href="#custom-gates">Custom gates</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="generic"><a class="header" href="#generic">Generic</a></h1>
+<p>The generic gate is the normal PLONK gate, which allows us to implement a number of different gates depending on how it’s called:</p>
+<ul>
+<li>addition gate: the first three columns are used to represent the left, right, and output wire</li>
+<li>multiplication gate: TKTK</li>
+<li>constant gate: only the most-left column is set to what the constant value should be</li>
+<li>public input gate: only the most-left column is set</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="poseidon-gate"><a class="header" href="#poseidon-gate">Poseidon Gate</a></h1>
 <p>This is the gate that allows us to implement hashing, via the <a href="specs/15_wires/../../specs/poseidon.html">Poseidon hash function</a>.</p>
@@ -942,7 +949,7 @@ The trick is to use three columns (or cells) to represent these three field elem
 <h2 id="one-last-thing"><a class="header" href="#one-last-thing">One last thing</a></h2>
 <p>The states are actually not stored contiguously in the first row, the fourth state is re-inserted before the first and second state as shown in the figure below.</p>
 <p><img src="specs/15_wires/../../img/poseidon_scrambled.png" alt="poseidon round 1" /></p>
-<p>This is in case we want to use a permutation with a different number of rounds. If for some reason the last state output on the next row is not the final result, but instead it is the fourth state.</p>
+<p>This is in case we want to use a permutation with a different number of rounds. If for some reason the last state output on the next row is not the final result, but instead it is the fourth state. (Only the first 7 rows are part of the permutation argument.)</p>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="poseidon-hash"><a class="header" href="#poseidon-hash">Poseidon hash</a></h1>
 <p><strong>THIS IS WORK-IN-PROGRESS</strong></p>

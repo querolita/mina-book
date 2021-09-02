@@ -166,7 +166,7 @@ The trick is to use three columns (or cells) to represent these three field elem
 <h2 id="one-last-thing"><a class="header" href="#one-last-thing">One last thing</a></h2>
 <p>The states are actually not stored contiguously in the first row, the fourth state is re-inserted before the first and second state as shown in the figure below.</p>
 <p><img src="../../img/poseidon_scrambled.png" alt="poseidon round 1" /></p>
-<p>This is in case we want to use a permutation with a different number of rounds. If for some reason the last state output on the next row is not the final result, but instead it is the fourth state.</p>
+<p>This is in case we want to use a permutation with a different number of rounds. If for some reason the last state output on the next row is not the final result, but instead it is the fourth state. (Only the first 7 rows are part of the permutation argument.)</p>
 
                     </main>
 
