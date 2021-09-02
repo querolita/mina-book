@@ -1,5 +1,7 @@
 # Poseidon hash
 
+**THIS IS WORK-IN-PROGRESS**
+
 A hash function that is efficient for zk-SNARKs. It is based on the sponge function, with a state composed of field elements and a permutation based on field element operation (addition and exponentiation).
 
 The perumtation is built like SPN block ciphers, with an S-box (exponentiation a group element), adding constants to the state, and matrix multiplication of the state (multiplications and additions) with an MDS matrix.
