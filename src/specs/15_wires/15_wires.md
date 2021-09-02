@@ -28,9 +28,14 @@ Refer to the [specification on polynomial commitments](). We make use of the fol
 
 Refer to the [specification on Poseidon](). We make use of the following functions from that specification:
 
-- `Poseidon.init(params)`
+- `Poseidon.init(params) -> FqSponge`
 - `Poseidon.update(field_elem)`
 - `Poseidon.finalize() -> FieldElem`
+
+specify the following functions on top:
+
+- `Poseidon.produce_challenge()` (TODO: uses the endomorphism)
+- `Poseidon.to_fr_sponge() -> state_of_fq_sponge_before_eval, FrSponge`
 
 ## Setup
 
@@ -212,7 +217,7 @@ Given:
   - fq_sponge_params: the sponge parameters to use for fiat-shamir. Fq indicates the base field, as we are mostly absorbing commitments, which are points on the curve.
 * **`prev_challenges`**: related to recursion (TODO: make this an Option/type/rename?)
 
-1. **Create the public polynomial** as the polynomial that, when evaluated at the first `cs.public` elements of the domain `cs.domain`, evaluates to the first `cs.public` elements of the witness' first column. Then negate that polynomial (TODO: we can simplify this by subtracting it later.)
+1. **Create the public polynomial** as the polynomial that, when evaluated at the first `cs.public` elements of the domain `cs.domain`, evaluates to the first `cs.public` elements of the witness' first column. Then negate that polynomial (as we need to subtract it from the rest).
 2. **Compute and commit to the 15 witness polynomials**.
     - Interpolate each column of the witness into a polynomial that evaluates to the entry's value when given points of the `cs.domain`.
     - Produce commits for each of the witness polynomials using `PolyCom.commit()`.
@@ -247,7 +252,7 @@ Given:
     - Squeeze to obtain the zeta challenge.
     - Use the endomorphism to produce $\zeta$ from the zeta challenge.
 9. **Evaluate the committed polynomials at $\zeta$ and $\zeta \omega$ (TODO: specify what $\omega$ is).** For each polynomials produce two types of evaluations: normal evaluations (to use for the linearization step) and chunked evaluations to use for the proof. (TODO: specify chunked evaluations)
-    - The 15 witness polynomials $w_0, \cdots, w_14$
+    - The 15 witness polynomials $w_0, \cdots, w_{14}$
     - The permutation polynomial $z$
     - The quotient polynomial $t$
 10. **Evaluate the $\sigma$ polynomials at $\zeta$ and $\zeta \omega$ as well**. This is to help the verifier.
@@ -303,12 +308,12 @@ Given:
 17. Compute the aggregated evaluation proof for evaluation points $\zeta$ and $\zeta \omega$ of the following polynomials (TODO: specify how). Use $v$ and $u$ as TKTK.
     - the prev_challenges (TODO: specify)
     - the public polynomial $p$
-    - the 15 witness polynomials $w_0, \cdots, w_14$
+    - the 15 witness polynomials $w_0, \cdots, w_{14}$
     - the permutation poylnomial $z$
     - the quotient polynomial $t$
 18. Set the final proof to: (TODO: shouldn't it contain a hash of the constraint system/circuit as an identifier as well? there could be attacks when you try to verify a wrong proof with a malicious or wrong constraint system?)
     - commitments are the commitments to:
-      - the 15 witness polynomials $w_0, \cdots, w_14$
+      - the 15 witness polynomials $w_0, \cdots, w_{14}$
       - the permutation polynomial $z$
       - the quotient polynomial $t$
     - the evaluation proof
@@ -321,7 +326,65 @@ Given:
     - the public inputs
     - prev_challenges (TODO: specify)
 
-## Proof Verification
+## Batch Proof Verification
+
+The following specifies our algorithm to batch verify several proofs at once.
+(TODO: it would be nice to have an API that verifies a single proof as well)
+
+### Oracles
+
+The oracle function re-creates all the challenges for the verifier, based on the proof received.
+
+It performs the following:
+
+1. Initialize an `fq_sponge`.
+2. Absors the public commitment to $p$.
+3. Absorb the 15 witness commitments to $w_0, \cdots, w_{14}$.
+4. Squeeze out the $\beta$ and $\gamma$ challenge (use the endomorphism technique).
+5. Absorb the permutation commitment to $z$.
+6. Squeeze out the $\alpha$ challenge (use the endomorphism technique).
+7. Absorb the $t$ commitment, padded with dummy curve points $(0,0)$ to make it of size `max_t_size`.
+8. Absorb the shifted part of the $t$ commitment, or a dummy curve point if the point at infinity.
+9. Squeeze out the $\zeta$ challenge (use the endomorphism technique).
+10. Create the Fr Sponge from the Fq Sponge using `Poseidon.to_fr_sponge`.
+11. Produce the public input polynomial
+12. Using the `fr_sponge` now:
+    - absorb the evaluations at $\zeta$ of:
+      - public input $p(\zeta)$ (TODO: why do we re-absorb the public input?)
+      - $w_0(\zeta)$
+      - $w_1(\zeta)$
+      - $w_2(\zeta)$
+      - $w_3(\zeta)$
+      - $w_4(\zeta)$ (TODO: what about the rest? This is for 5-wires)
+      - $z(\zeta)$
+      - $t(\zeta)$
+      - $f(\zeta)$
+      - $s_0(\zeta)$
+      - $s_1(\zeta)$
+      - $s_2(\zeta)$
+      - $s_3(\zeta)$ (TODO: what about the rest? This is for 5-wires)
+      - (TODO: what about s_4?)
+    - absorb the evaluations at $\zeta \omega$ of:
+      - public input $p(\zeta \omega)$
+      - $w_0(\zeta \omega)$
+      - $w_1(\zeta \omega)$
+      - $w_2(\zeta \omega)$
+      - $w_3(\zeta \omega)$
+      - $w_4(\zeta \omega)$ (TODO: what about the rest? This is for 5-wires)
+      - $z(\zeta \omega)$
+      - $t(\zeta \omega)$
+      - $f(\zeta \omega)$
+      - $s_0(\zeta \omega)$
+      - $s_1(\zeta \omega)$
+      - $s_2(\zeta \omega)$
+      - $s_3(\zeta \omega)$ (TODO: what about the rest? This is for 5-wires)
+      - (TODO: what about s_4?)
+13. Squeeze out the challenges $v$ and $u$.
+14. TODO: prev_challenges stuff
+15. TODO: combined_inner_product stuff (does this really belongs in oracles?)
+16. return the state of the fq_sponge, all the challenges, etc.
+
+### Protocol
 
 Given:
 
@@ -329,7 +392,7 @@ Given:
 * a vector of proofs:
   * a number of commitments
   * a proof
-  * and a verifier index containing:
+  * and a verifier index containing: (TODO: no need to repeat this here, should be in setup sections)
     * domain
     * max_poly_size
     * max_quote_size
@@ -352,11 +415,10 @@ Given:
     * fr_sponge_params
     * fq_sponge_params
 
-
 do:
 
-- if the length of the proofs is 0, return true
-- create params from proofs, for each proof as (index, lgr_comm, proof) do:
+1. if the length of the proofs is 0, return true
+2. create params from proofs, for each proof as (index, lgr_comm, proof) do:
     - compute public input commitment as `- proof.public[1] * L_1(x) - proof.public[2] * L_2(x) - ...`
     - create a sponge and create all the challenges from it:
         - oracles.beta/gamma: absorb the public and the witness commitments, then squeeze out oracles.beta and oracles.gamma
