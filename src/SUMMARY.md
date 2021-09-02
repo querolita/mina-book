@@ -24,3 +24,4 @@
   - [Maller's optimization](./crypto/plonk/maller.md)
 - [Lagrange basis in multiplicative subgroups](./crypto/plonk/lagrange.md)
 - [Non-interaction with fiat-shamir](./crypto/plonk/fiat_shamir.md)
+- [Final check](./crypto/plonk/final_check.md)
