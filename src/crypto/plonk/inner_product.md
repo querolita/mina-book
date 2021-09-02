@@ -115,11 +115,15 @@ We can picture the protocol as follows:
 2. The verifier sends a point $s$, asking for the value $f(s)$. To help the prover perform a proof of correct evaluation, they also send a random challenge $x$.
 3. The prover sends the result of the evaluation, $z$, as well as a proof.
 
+![inner 1](/img/inner1.png)
+
+<!--
 ```sequence
 Prover->Verifier: com(f)
 Verifier->Prover: s, random x
 Prover->Verifier: z = f(s), proof of opening
 ```
+-->
 
 Does that make sense? Of course what's interesting to us is the proof, and how the prover uses that random $x$.
 
@@ -185,12 +189,16 @@ So in the end, the proof has becomes:
 
 We can update our previous diagram:
 
+![inner 2](/img/inner2.png)
+
+<!--
 ```sequence
 Prover->Verifier: com(f)
 Verifier->Prover: s, random x
 Prover->Verifier: z = f(s)
 Prover->Verifier: a', L_a, R_a, L_z, R_z
 ```
+-->
 
 In our example, the naive proof was to reveal $\vec{a}$ which was 4 field elements. We are now revealing instead 2 + 2 + 2 = 6 field elements. This is not great, but if $\vec{a}$ was much larger (let's say 128), the reduction in half would still be of 64 + 2 + 2 = 68 field elements. Not bad no? We can do better though...
 
@@ -244,6 +252,9 @@ $$\langle \vec{a'}, \vec{G'} \rangle  + \langle \vec{a'}, \vec{b'} \rangle U$$
 For this, the verifier needs to recompute $\vec{G'}$ and $\vec{b'}$ by themselves, which they can as they have all the necessary information.
 We can update our previous diagram:
 
+![inner 3](/img/inner3.png)
+
+<!--
 ```sequence
 Prover->Verifier: com(f) = A
 Verifier->Prover: s, random x
@@ -252,6 +263,7 @@ Prover->Verifier: a', L, R
 Note right of Verifier: reconstruct G', b', C'
 Note right of Verifier: open C'
 ```
+-->
 
 ### What about zero-knowledge?
 
@@ -311,6 +323,9 @@ where can I find a proof? perhaps appendix C of https://eprint.iacr.org/2017/106
 
 Finally, we can look at what the real protocol end up looking at with $log_2(n)$ rounds of reduction followed by a commitment opening.
 
+![inner 4](/img/inner4.png)
+
+<!--
 ```sequence
 Prover->Verifier: com(f)
 Verifier->Prover: s
@@ -325,6 +340,7 @@ Prover->Verifier: r', a'
 Note right of Verifier: reconstruct G', b', C'
 Note right of Verifier: open C'
 ```
+-->
 
 So far the protocol was interactive, but you can make it non-interactive by simply using the Fiat-Shamir transformation. That's all I'll say about that.
 

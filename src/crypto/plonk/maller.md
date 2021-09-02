@@ -21,6 +21,9 @@ $$\forall x \in \mathbb{F}, \; h_1(x)h_2(x) - h_3(x) = 0$$
 
 given commitments of $h_1, h_2, h_3$.
 
+![maller 1](/img/maller_1.png)
+
+<!--
 ```sequence
 Note left of Prover: commits to h1, h2, h3
 Prover->Verifier: com(h1), com(h2), com(h3)
@@ -31,6 +34,7 @@ Prover->Verifier: h1(s), h2(s), h3(s)
 Prover->Verifier: proofs of openings
 Note right of Verifier: verifies that \n h1(s)h2(s) - h3(s) = 0
 ```
+-->
 
 A shorter proof exists. Essentially, if the verifier already has the opening `h1(s)`, they can reduce the problem to showing that 
 
@@ -38,6 +42,9 @@ $$ \forall x \in \mathbb{F}, \; L(x) = h_1(s)h_2(x) - h_3(x) = 0$$
 
 given commitments of $h_1, h_2, h_3$ and evaluation of $h1$ at a point $s$.
 
+![maller 2](/img/maller_2.png)
+
+<!--
 ```sequence
 Note left of Prover: commits to h1, h2, h3
 Prover->Verifier: com(h1), com(h2), com(h3)
@@ -49,6 +56,7 @@ Prover->Verifier: proofs of openings
 Note right of Verifier: forms polynomial com(L) = \n h1(s)com(h2) - com(h3)
 Note right of Verifier: checks that L(s) = 0
 ```
+-->
 
 ## Notes
 
@@ -58,16 +66,20 @@ $$L'(x) = h_1(x)h_2(x) - h_3(x)$$
 
 By doing
 
+![maller 3](/img/maller_3.png)
+
+<!--
 ```sequence
 Note left of Prover: commits to h1, h2, h3
 Prover->Verifier: com(h1), com(h2), com(h3)
 Note right of Verifier: generates random point s
-Verifier-->Prover: s
+Verifier->Prover: s
 Note left of Prover: evaluates at point s
 Prover->Verifier: L'(s), proof of opening
 Note right of Verifier: forms polynomial com(L') = \n com(h1)com(h2) - com(h3)
 Note right of Verifier: verifies that \n h1(s)h2(s) - h3(s) = 0
 ```
+-->
 
 The problem here is that you can't multiply the commitments together without using a pairing (if you're using a pairing-based polynomial commitment scheme), and you can only use that pairing once in the protocol.
 

@@ -20,6 +20,9 @@ $$
 
 Since they already know $f$, they can produce $com(f)$, the only thing they need is $com(t)$. So the protocol looks like that:
 
+![maller 15 1](/img/maller_15_1.png)
+
+<!--
 ```sequence
 Prover->Verifier: com(t)
 Note right of Verifier: generates random point zeta
@@ -28,6 +31,7 @@ Prover->Verifier: proof that L(zeta) = 0
 Note right of Verifier: produces com(f) from f and \n com(L) = com(f) - Z_H(zeta) com(t)
 Note right of Verifier: verifies the evaluation proof \n to check that L(zeta) = 0
 ```
+-->
 
 ## Inner product stuff
 
@@ -79,3 +83,17 @@ Now here's how we need to modify the current protocol:
 5. The verifier must recreate $com(\bar L)$, the commitment to $\bar L$, themselves so that they can verify the evaluation proofs of both $\bar L(\zeta)$ and $\bar L(\zeta\omega)$.
 6. TODO: omega stuff?
 7. TODO: Do we still need to check an upperbound on $t$?
+
+![maller 15 2](/img/maller_15_2.png)
+<!--
+```sequence
+Prover->Verifier: com(t) (several of them)
+Note right of Verifier: generates random point zeta
+Verifier->Prover: zeta
+Prover->Verifier: L_bar(zeta * omega) = y
+Prover->Verifier: proof that L_bar(zeta) = 0 
+Prover->Verifier: proof that L_bar(zeta * omega) = y 
+Note right of Verifier: produces com(L_bar)
+Note right of Verifier: verifies the evaluation proof \n to check that L_bar(zeta) = 0
+```
+-->
