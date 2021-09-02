@@ -499,10 +499,14 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 <li>The verifier sends a point <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">s</span></span></span></span>, asking for the value <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span></span>. To help the prover perform a proof of correct evaluation, they also send a random challenge <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span>.</li>
 <li>The prover sends the result of the evaluation, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span>, as well as a proof.</li>
 </ol>
-<pre><code class="language-sequence">Prover-&gt;Verifier: com(f)
-Verifier-&gt;Prover: s, random x
-Prover-&gt;Verifier: z = f(s), proof of opening
-</code></pre>
+<p><img src="/img/inner1.png" alt="inner 1" /></p>
+<!--
+```sequence
+Prover->Verifier: com(f)
+Verifier->Prover: s, random x
+Prover->Verifier: z = f(s), proof of opening
+```
+-->
 <p>Does that make sense? Of course what’s interesting to us is the proof, and how the prover uses that random <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span>.</p>
 <h3 id="reduced-problem"><a class="header" href="#reduced-problem">Reduced problem</a></h3>
 <p>First, the prover cuts everything in half. Then they use <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">x</span></span></span></span> to construct linear combinations of these cuts:</p>
@@ -686,11 +690,15 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 <li>the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> scalar values</li>
 </ul>
 <p>We can update our previous diagram:</p>
-<pre><code class="language-sequence">Prover-&gt;Verifier: com(f)
-Verifier-&gt;Prover: s, random x
-Prover-&gt;Verifier: z = f(s)
-Prover-&gt;Verifier: a', L_a, R_a, L_z, R_z
-</code></pre>
+<p><img src="/img/inner2.png" alt="inner 2" /></p>
+<!--
+```sequence
+Prover->Verifier: com(f)
+Verifier->Prover: s, random x
+Prover->Verifier: z = f(s)
+Prover->Verifier: a', L_a, R_a, L_z, R_z
+```
+-->
 <p>In our example, the naive proof was to reveal <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.714em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">a</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2355em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
 3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
 10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
@@ -855,13 +863,17 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
 c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span></span></span></span> by themselves, which they can as they have all the necessary information.
 We can update our previous diagram:</p>
-<pre><code class="language-sequence">Prover-&gt;Verifier: com(f) = A
-Verifier-&gt;Prover: s, random x
-Prover-&gt;Verifier: z = f(s)
-Prover-&gt;Verifier: a', L, R
+<p><img src="/img/inner3.png" alt="inner 3" /></p>
+<!--
+```sequence
+Prover->Verifier: com(f) = A
+Verifier->Prover: s, random x
+Prover->Verifier: z = f(s)
+Prover->Verifier: a', L, R
 Note right of Verifier: reconstruct G', b', C'
 Note right of Verifier: open C'
-</code></pre>
+```
+-->
 <h3 id="what-about-zero-knowledge"><a class="header" href="#what-about-zero-knowledge">What about zero-knowledge?</a></h3>
 <p>Didn’t we forget something? Oh right, we’re sending <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> in clear, a single element that will leak some information about the original vector <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.714em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">a</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.2355em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
 3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
@@ -993,19 +1005,23 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 <p>where can I find a proof? perhaps appendix C of https://eprint.iacr.org/2017/1066.pdf</p>
 <h3 id="the-real-protocol-and-a-note-on-non-interactivity"><a class="header" href="#the-real-protocol-and-a-note-on-non-interactivity">The real protocol, and a note on non-interactivity</a></h3>
 <p>Finally, we can look at what the real protocol end up looking at with <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> rounds of reduction followed by a commitment opening.</p>
-<pre><code class="language-sequence">Prover-&gt;Verifier: com(f)
-Verifier-&gt;Prover: s
-Prover-&gt;Verifier: z = f(s)
-Verifier-&gt;Prover: random x
-Prover-&gt;Verifier: L, R
+<p><img src="/img/inner4.png" alt="inner 4" /></p>
+<!--
+```sequence
+Prover->Verifier: com(f)
+Verifier->Prover: s
+Prover->Verifier: z = f(s)
+Verifier->Prover: random x
+Prover->Verifier: L, R
 Note right of Prover: many more rounds later...
-Verifier-&gt;Prover: random x
-Prover-&gt;Verifier: L, R
+Verifier->Prover: random x
+Prover->Verifier: L, R
 Note left of Prover: now let's open \nthe last commitment
-Prover-&gt;Verifier: r', a'
+Prover->Verifier: r', a'
 Note right of Verifier: reconstruct G', b', C'
 Note right of Verifier: open C'
-</code></pre>
+```
+-->
 <p>So far the protocol was interactive, but you can make it non-interactive by simply using the Fiat-Shamir transformation. That’s all I’ll say about that.</p>
 
                     </main>
