@@ -61,4 +61,4 @@ The states are actually not stored contiguously in the first row, the fourth sta
 
 ![poseidon round 1](../../img/poseidon_scrambled.png)
 
-This is in case we want to use a permutation with a different number of rounds. If for some reason the last state output on the next row is not the final result, but instead it is the fourth state.
+This is in case we want to use a permutation with a different number of rounds. If for some reason the last state output on the next row is not the final result, but instead it is the fourth state. (Only the first 7 rows are part of the permutation argument.)
