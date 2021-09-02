@@ -20,7 +20,7 @@ $$
 
 Since they already know $f$, they can produce $com(f)$, the only thing they need is $com(t)$. So the protocol looks like that:
 
-![maller 15 1](/img/maller_15_1.png)
+![maller 15 1](../../img/maller_15_1.png)
 
 <!--
 ```sequence
@@ -84,7 +84,7 @@ Now here's how we need to modify the current protocol:
 6. TODO: omega stuff?
 7. TODO: Do we still need to check an upperbound on $t$?
 
-![maller 15 2](/img/maller_15_2.png)
+![maller 15 2](../../img/maller_15_2.png)
 <!--
 ```sequence
 Prover->Verifier: com(t) (several of them)
