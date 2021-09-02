@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="crypto/overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="chapter-item expanded affix "><li class="part-title">Specifications</li><li class="chapter-item expanded "><a href="specs/polynomial_commitment.html"><strong aria-hidden="true">2.</strong> Polynomial commitment</a></li><li class="chapter-item expanded "><a href="specs/15_wires.html"><strong aria-hidden="true">3.</strong> 15-wires</a></li><li class="chapter-item expanded "><a href="specs/poseidon.html"><strong aria-hidden="true">4.</strong> Poseidon hash</a></li><li class="chapter-item expanded "><a href="specs/pasta_curves.html"><strong aria-hidden="true">5.</strong> Pasta curves</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Consensus</div></li><li class="chapter-item expanded affix "><li class="part-title">Background on PLONK</li><li class="chapter-item expanded "><a href="crypto/plonk/overview.html"><strong aria-hidden="true">7.</strong> Overview</a></li><li class="chapter-item expanded "><a href="crypto/plonk/glossary.html"><strong aria-hidden="true">8.</strong> Glossary</a></li><li class="chapter-item expanded "><a href="crypto/plonk/commitments.html"><strong aria-hidden="true">9.</strong> Commitments</a></li><li class="chapter-item expanded "><a href="crypto/plonk/polynomial_commitments.html"><strong aria-hidden="true">10.</strong> Polynomial commitments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="crypto/plonk/inner_product.html"><strong aria-hidden="true">10.1.</strong> Inner product argument</a></li><li class="chapter-item expanded "><a href="crypto/plonk/inner_product_api.html"><strong aria-hidden="true">10.2.</strong> Different functionnalities</a></li><li class="chapter-item expanded "><a href="crypto/plonk/maller.html"><strong aria-hidden="true">10.3.</strong> Maller's optimization</a></li></ol></li><li class="chapter-item expanded "><a href="crypto/plonk/lagrange.html"><strong aria-hidden="true">11.</strong> Lagrange basis in multiplicative subgroups</a></li><li class="chapter-item expanded "><a href="crypto/plonk/fiat_shamir.html"><strong aria-hidden="true">12.</strong> Non-interaction with fiat-shamir</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="crypto/overview.html"><strong aria-hidden="true">1.</strong> Overview</a></li><li class="chapter-item expanded affix "><li class="part-title">Specifications</li><li class="chapter-item expanded "><a href="specs/polynomial_commitment.html"><strong aria-hidden="true">2.</strong> Polynomial commitment</a></li><li class="chapter-item expanded "><a href="specs/15_wires/15_wires.html"><strong aria-hidden="true">3.</strong> 15-wires</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="specs/15_wires/custom_gates.html"><strong aria-hidden="true">3.1.</strong> Custom gates</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="specs/15_wires/generic.html"><strong aria-hidden="true">3.1.1.</strong> Generic</a></li><li class="chapter-item expanded "><a href="specs/15_wires/poseidon.html"><strong aria-hidden="true">3.1.2.</strong> Poseidon</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="specs/poseidon.html"><strong aria-hidden="true">4.</strong> Poseidon hash</a></li><li class="chapter-item expanded "><a href="specs/pasta_curves.html"><strong aria-hidden="true">5.</strong> Pasta curves</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">6.</strong> Consensus</div></li><li class="chapter-item expanded affix "><li class="part-title">Background on PLONK</li><li class="chapter-item expanded "><a href="crypto/plonk/overview.html"><strong aria-hidden="true">7.</strong> Overview</a></li><li class="chapter-item expanded "><a href="crypto/plonk/glossary.html"><strong aria-hidden="true">8.</strong> Glossary</a></li><li class="chapter-item expanded "><a href="crypto/plonk/commitments.html"><strong aria-hidden="true">9.</strong> Commitments</a></li><li class="chapter-item expanded "><a href="crypto/plonk/polynomial_commitments.html"><strong aria-hidden="true">10.</strong> Polynomial commitments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="crypto/plonk/inner_product.html"><strong aria-hidden="true">10.1.</strong> Inner product argument</a></li><li class="chapter-item expanded "><a href="crypto/plonk/inner_product_api.html"><strong aria-hidden="true">10.2.</strong> Different functionnalities</a></li><li class="chapter-item expanded "><a href="crypto/plonk/maller.html"><strong aria-hidden="true">10.3.</strong> Maller's optimization</a></li></ol></li><li class="chapter-item expanded "><a href="crypto/plonk/lagrange.html"><strong aria-hidden="true">11.</strong> Lagrange basis in multiplicative subgroups</a></li><li class="chapter-item expanded "><a href="crypto/plonk/fiat_shamir.html"><strong aria-hidden="true">12.</strong> Non-interaction with fiat-shamir</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -145,6 +145,7 @@
 <p>In memory of Vitaly Zelov.</p>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="polynomial-commitment"><a class="header" href="#polynomial-commitment">Polynomial commitment</a></h1>
+<p><strong>THIS IS WORK-IN-PROGRESS</strong></p>
 <p>Our polynomial commitment scheme is a bootleproof-type of commitment scheme, which is a mix of:</p>
 <ul>
 <li>The polynomial commitment scheme described in appendix A.1 of the <a href="https://eprint.iacr.org/2020/1618">PCD paper</a>.</li>
@@ -354,107 +355,410 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 <p>do:</p>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="15-wires"><a class="header" href="#15-wires">15-wires</a></h1>
+<p><strong>THIS IS WORK-IN-PROGRESS</strong></p>
+<p>This document specifies the 15-wires variant of PLONK.</p>
+<h2 id="overview-1"><a class="header" href="#overview-1">Overview</a></h2>
+<p>The document follows the following structure:</p>
+<ol>
+<li><strong>Setup</strong>. A one-time setup for the proof system.</li>
+<li><strong>Per-circuit setup</strong>. A one-time setup for each circuit that are used in the proof system.</li>
+<li><strong>Proof creation</strong>. How to create a proof.</li>
+<li><strong>Proof verification</strong>. How to verify a proof.</li>
+</ol>
+<h2 id="dependencies"><a class="header" href="#dependencies">Dependencies</a></h2>
+<h3 id="polynomial-commitments"><a class="header" href="#polynomial-commitments">Polynomial Commitments</a></h3>
+<p>Refer to the <a href="specs/15_wires/">specification on polynomial commitments</a>. We make use of the following functions from that specification:</p>
+<ul>
+<li><code>PolyCom.non_hiding_commit(poly) -&gt; PolyCom::NonHidingCommitment</code></li>
+<li><code>PolyCom.commit(poly) -&gt; PolyCom::HidingCommitment</code></li>
+<li><code>PolyCom.evaluation_proof(poly, commitment, point) -&gt; EvaluationProof</code></li>
+<li><code>PolyCom.verify(commitment, point, evaluation, evaluation_proof) -&gt; bool</code></li>
+</ul>
+<h3 id="poseidon-hash-function"><a class="header" href="#poseidon-hash-function">Poseidon hash function</a></h3>
+<p>Refer to the <a href="specs/15_wires/">specification on Poseidon</a>. We make use of the following functions from that specification:</p>
+<ul>
+<li><code>Poseidon.init(params)</code></li>
+<li><code>Poseidon.update(field_elem)</code></li>
+<li><code>Poseidon.finalize() -&gt; FieldElem</code></li>
+</ul>
+<h2 id="setup"><a class="header" href="#setup">Setup</a></h2>
+<p>This section introduces the global setup which is used for any circuit. For each circuit that a prover and a verifier wants to use the protocol for, a per-circuit setup will have to be performed as well. See the <a href="specs/15_wires/15_wires.html#per-circuit-setup">next section on per-circuit setup</a>.</p>
+<h3 id="data-structures"><a class="header" href="#data-structures">Data Structures</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct SRS&lt;G: CommitmentCurve&gt; {
+    /// Curve points for committing polynomials
+    g: Vec&lt;G&gt;, 
+    /// Curve point for blinding
+    h: G,      
+    // Coefficients for the curve endomorphism
+    endo_r: G::ScalarField,
+    endo_q: G::BaseField,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="per-circuit-setup"><a class="header" href="#per-circuit-setup">Per-circuit setup</a></h2>
+<h3 id="data-structures-1"><a class="header" href="#data-structures-1">Data Structures</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct ConstraintSystem&lt;F: FftField&gt; {
+    // Basics
+    // ------
+
+    /// number of public inputs
+    public: usize,
+    /// evaluation domains
+    domain: EvaluationDomains&lt;F&gt;,
+    /// circuit gates
+    gates: Vec&lt;CircuitGate&lt;F&gt;&gt;,
+
+    // Polynomials over the monomial base
+    // ----------------------------------
+
+    /// permutation polynomial array
+    sigmam: [DP&lt;F&gt;; PERMUTS],
+    /// zero-knowledge polynomial
+    zkpm: DP&lt;F&gt;,
+
+    // Generic constraint selector polynomials
+    // ---------------------------------------
+
+    /// linear wire constraint polynomial
+    qwm: [DP&lt;F&gt;; GENERICS],
+    /// multiplication polynomial
+    qmm: DP&lt;F&gt;,
+    /// constant wire polynomial
+    qc: DP&lt;F&gt;,
+
+    // Poseidon selector polynomials
+    // -----------------------------
+
+    /// round constant polynomials
+    rcm: [[DP&lt;F&gt;; SPONGE_WIDTH]; ROUNDS_PER_ROW],
+    /// poseidon constraint selector polynomial
+    psm: DP&lt;F&gt;,
+
+    // ECC arithmetic selector polynomials
+    // -----------------------------------
+
+    /// EC point addition constraint selector polynomial
+    addm: DP&lt;F&gt;,
+    /// EC point doubling constraint selector polynomial
+    doublem: DP&lt;F&gt;,
+    /// mulm constraint selector polynomial
+    mulm: DP&lt;F&gt;,
+    /// emulm constraint selector polynomial
+    emulm: DP&lt;F&gt;,
+
+    //
+    // Polynomials over lagrange base
+    //
+
+    // Generic constraint selector polynomials
+    // ---------------------------------------
+
+    /// left input wire polynomial over domain.d4
+    qwl: [E&lt;F, D&lt;F&gt;&gt;; GENERICS],
+    /// multiplication evaluations over domain.d4
+    qml: E&lt;F, D&lt;F&gt;&gt;,
+
+    // permutation polynomials
+    // -----------------------
+
+    /// permutation polynomial array evaluations over domain d1
+    sigmal1: [Vec&lt;F&gt;; PERMUTS],
+    /// permutation polynomial array evaluations over domain d8
+    sigmal8: [E&lt;F, D&lt;F&gt;&gt;; PERMUTS],
+    /// SID polynomial
+    sid: Vec&lt;F&gt;,
+
+    // Poseidon selector polynomials
+    // -----------------------------
+
+    /// poseidon selector over domain.d4
+    ps4: E&lt;F, D&lt;F&gt;&gt;,
+    /// poseidon selector over domain.d8
+    ps8: E&lt;F, D&lt;F&gt;&gt;,
+
+    // ECC arithmetic selector polynomials
+    // -----------------------------------
+
+    /// EC point addition selector evaluations w over domain.d4
+    addl: E&lt;F, D&lt;F&gt;&gt;,
+    /// EC point doubling selector evaluations w over domain.d8
+    doubl8: E&lt;F, D&lt;F&gt;&gt;,
+    /// EC point doubling selector evaluations w over domain.d4
+    doubl4: E&lt;F, D&lt;F&gt;&gt;,
+    /// scalar multiplication selector evaluations over domain.d4
+    mull4: E&lt;F, D&lt;F&gt;&gt;,
+    /// scalar multiplication selector evaluations over domain.d8
+    mull8: E&lt;F, D&lt;F&gt;&gt;,
+    /// endoscalar multiplication selector evaluations over domain.d8
+    emull: E&lt;F, D&lt;F&gt;&gt;,
+
+    // Constant polynomials
+    // --------------------
+    
+    /// 1-st Lagrange evaluated over domain.d8
+    l1: E&lt;F, D&lt;F&gt;&gt;,
+    /// 0-th Lagrange evaluated over domain.d4
+    // TODO(mimoo): be consistent with the paper/spec, call it L1 here or call it L0 there
+    l04: E&lt;F, D&lt;F&gt;&gt;,
+    /// 0-th Lagrange evaluated over domain.d8
+    l08: E&lt;F, D&lt;F&gt;&gt;,
+    /// zero evaluated over domain.d8
+    zero4: E&lt;F, D&lt;F&gt;&gt;,
+    /// zero evaluated over domain.d8
+    zero8: E&lt;F, D&lt;F&gt;&gt;,
+    /// zero-knowledge polynomial over domain.d8
+    zkpl: E&lt;F, D&lt;F&gt;&gt;,
+
+    /// wire coordinate shifts
+    shift: [F; PERMUTS],
+    /// coefficient for the group endomorphism
+    endo: F,
+
+    /// random oracle argument parameters
+    fr_sponge_params: ArithmeticSpongeParams&lt;F&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
 <h2 id="proof-creation"><a class="header" href="#proof-creation">Proof Creation</a></h2>
+<h3 id="data-structure"><a class="header" href="#data-structure">Data structure</a></h3>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct ProverProof&lt;G: AffineCurve&gt; {
+    /// polynomial commitments
+    commitments: ProverCommitments&lt;G&gt;,
+    /// batched commitment opening proof
+    proof: OpeningProof&lt;G&gt;,
+    /// chunked polynomial evaluations (TODO: specify)
+    evals: [ProofEvaluations&lt;Vec&lt;Fr&lt;G&gt;&gt;&gt;; 2],
+    /// public part of the witness
+    public: Vec&lt;Fr&lt;G&gt;&gt;,
+    /// The challenges underlying the optional polynomials folded into the proof
+    prev_challenges: Vec&lt;(Vec&lt;Fr&lt;G&gt;&gt;, PolyComm&lt;G&gt;)&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h3 id="protocol"><a class="header" href="#protocol">Protocol</a></h3>
 <p>Idea: it’s fine if something crash here, not in verifier tho</p>
 <p>Given:</p>
 <ul>
-<li><strong><code>witness</code></strong>: a witness, which is a list of columns (15) containing n group elements</li>
-<li><strong><code>group_map</code></strong>: a group map, an operation TKTK</li>
-<li><strong><code>index</code></strong>: an index, information related to the circuit</li>
-<li><strong><code>prev_challenges</code></strong>: ???</li>
+<li><strong><code>witness</code></strong>: a list of 15 vectors, each containg <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> group elements. Note that the first <code>cs.public</code> elements of the first vector contain the public inputs (and so the first <code>cs.public</code> elements of the other vectors must be set to 0).</li>
+<li><strong><code>group_map</code></strong>: (TODO: move this to setup?)</li>
+<li><strong><code>prover_index</code></strong>: a structure containing:
+<ul>
+<li>constraint system: the constraint system of a specific circuit</li>
+<li>SRS: (TODO: this should move out of the index)</li>
+<li>max_poly_size: (TODO: this should be in SRS)</li>
+<li>max_quot_size: (TODO: I think we don’t need this anymore after maller’s optimization)</li>
+<li>fq_sponge_params: the sponge parameters to use for fiat-shamir. Fq indicates the base field, as we are mostly absorbing commitments, which are points on the curve.</li>
+</ul>
+</li>
+<li><strong><code>prev_challenges</code></strong>: related to recursion (TODO: make this an Option/type/rename?)</li>
 </ul>
 <ol>
-<li><strong>Create the public polynomial</strong> (via interpolation) as the polynomial that evaluates to the public values for x = domain[0..public.len()-1]. The public values are taken from the witness’ first column. Then negate the public polynomial (really?)</li>
-<li><strong>Compute the witness polynomials</strong>. Interpolate each column of the witness into a polynomial that evaluates to the entry’s value when given points of the domain d1. The first column polynomial will also containt the public values (weird no?)</li>
-<li><strong>Commit the wire values</strong>. For each witness polynomial, commit them via the following process:
-a. perform a multi scalar multiplication (MSM) with the coefficient of the polynomial and the SRS’s base (G_1, G2, ..., G_N) to produce a non-hidding commitment
-b. generate a random group element w
-c. add [w]H to the non-hidding commitment to produce a hiding commitment.</li>
-<li><strong>Absorb transcript and produce <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span></span></span></span>, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span></span></span></span></strong>.
+<li><strong>Create the public polynomial</strong> as the polynomial that, when evaluated at the first <code>cs.public</code> elements of the domain <code>cs.domain</code>, evaluates to the first <code>cs.public</code> elements of the witness’ first column. Then negate that polynomial (TODO: we can simplify this by subtracting it later.)</li>
+<li><strong>Compute and commit to the 15 witness polynomials</strong>.
 <ul>
-<li>Absorb a non-hiding commitment of the public input (absorb x coordinate, then y coordinate, as two field elements)</li>
-<li>Absorb each witness polynomial commitment in the same way</li>
-<li>Squeeze out two field elements: beta and gamma (the way squeeze is implemented involves sponge_5wires, look into that)</li>
+<li>Interpolate each column of the witness into a polynomial that evaluates to the entry’s value when given points of the <code>cs.domain</code>.</li>
+<li>Produce commits for each of the witness polynomials using <code>PolyCom.commit()</code>.</li>
 </ul>
 </li>
-<li><strong>Compute permutation aggregation polynomial</strong>.
+<li><strong>Absorb the public input and the witness and produce <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span></span></span></span></strong>.
 <ul>
-<li>perm_aggreg() &lt;- how does this work?</li>
-<li>compute the commitment of the permutation polynomial <code>z</code></li>
+<li>Create a non-hiding commitment of the public input via <code>PolyCom.non_hiding_commit()</code>.</li>
+<li>Absorb it (absorb the coordinates as two field elements) via <code>Poseidon.update()</code>. Assumption here is that the commitment is always the same size (TODO: verify/enforce this)</li>
+<li>Absorb each witness polynomial commitment in the same way.</li>
+<li>Squeeze two field elements: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span></span></span></span>, each of size 128 bits using (TODO: specify how to do that)</li>
 </ul>
 </li>
-<li><strong>Absorb the z commitment into the argument and query <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span></strong>
+<li><strong>Compute and commit to the permutation polynomial</strong>.
 <ul>
-<li>absorb the z polynomial commitment</li>
-<li>produce the alpha challenge (a group element)</li>
-<li>use ScalarChallenge::to_field with the SRS’ endo_r to create alpha’</li>
-<li>compute powers of alpha’ (from alpha’^0 to alpha’^59)</li>
+<li>Compute the permutation polynomial <code>z</code> (TODO: specify)</li>
+<li>Compute a commitment of the permutation polynomial <code>z</code> using <code>PolyCom.commit()</code></li>
 </ul>
 </li>
-<li><strong>Evaluate polynomials over domains</strong>
+<li><strong>Absorb the permutation and produce <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span></strong>
 <ul>
-<li>???</li>
+<li>Absorb the z polynomial commitment. Assumption here is that the commitment to z is always the same size (TODO: verify/enforce this) </li>
+<li>Squeeze out a field element <code>alpha_challenge</code> of size 128 bits (TODO: specify)</li>
+<li>Use the endomorphism to produce <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span> (TODO: specify)</li>
 </ul>
 </li>
-<li><strong>Compute quotient polynomial</strong>.
-<ul>
-<li>Compute the quotient polynomial of all gates and the permutation polynomial individually. These will sometimes use other domains! Why? I guess it requires more than n evaluations?
+<li><strong>Produce the gate polynomials for the circuit</strong>.
 a. Permutation
 b. Generic
 c. Poseidon
 d. EC addition
 e. EC doubling
-f. endoscaling
-g. scalar multiplication</li>
-<li>collect contribution evaluations
+f. Endoscaling
+g. Scalar multiplication</li>
+<li><strong>Compute and commit to the quotient polynomial <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span></strong>.
 <ul>
-<li>t4 = add + mul4 + pos4 + gen + doub4</li>
-<li>t8 = perm + mul + emul8 + pos8 + doub8</li>
+<li>Add all of the polynomials together then divide the result with the vanishing polynomial (TODO: specify). </li>
+<li>Ensure that the division doesn’t have a non-zero remainder.</li>
+<li>Perform an upperbounded polynomial commitment with <code>upperbound = max_quot_size</code> (which is hardcoded in the index/circuit) via <code>PolyCom.commit()</code>.</li>
 </ul>
 </li>
-<li>divide contributions with vanishing polynomial
+<li><strong>Absorb the quotient polynomial and produce <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span></span></span></span></strong>
 <ul>
-<li>f = t4.interpolate() + t8.interpolate() + genp + posp</li>
-<li>t = f/Zh</li>
-<li>t += bnd</li>
+<li>Absorb the commitment of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span> (TODO: specify how to do that when a commitment is several points)</li>
+<li>Absorb “fake” group elements <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mclose">)</span></span></span></span> as padding to make sure that exactly <code>max_t_size</code> curve points are absorbed with the commitment of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span>. This is to make sure that we always absorb the same number of curve points no matter the length of the commitment of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span>.</li>
+<li>If the shifted value of the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span> commitment is the point-at-infinity, absorb the “fake” group element <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mclose">)</span></span></span></span>. Otherwise, absorb the shifted value.</li>
+<li>Squeeze to obtain the zeta challenge.</li>
+<li>Use the endomorphism to produce <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span></span></span></span> from the zeta challenge.</li>
 </ul>
 </li>
+<li><strong>Evaluate the committed polynomials at <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span> (TODO: specify what <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span> is).</strong> For each polynomials produce two types of evaluations: normal evaluations (to use for the linearization step) and chunked evaluations to use for the proof. (TODO: specify chunked evaluations)
+<ul>
+<li>The 15 witness polynomials <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">4</span></span></span></span></li>
+<li>The permutation polynomial <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span></li>
+<li>The quotient polynomial <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span></li>
 </ul>
 </li>
-<li>Commit the quotient polynomial
+<li><strong>Evaluate the <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span> polynomials at <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span> as well</strong>. This is to help the verifier.</li>
+<li><strong>Produce the linearized gate polynomials for the circuit</strong>.
+a. Permutation
+b. Generic
+c. Poseidon
+d. EC addition
+e. EC doubling
+f. Endoscaling
+g. Scalar multiplication</li>
+<li><strong>Produce the linearized and chunked evaluations of <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span></strong>:
 <ul>
-<li>perform an upperbounded polynomial commitment with upperbound = max_quot_size (which is hardcoded in the index/circuit)</li>
+<li>Add all the linearized gate polynomials together to produce <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span>.</li>
+<li>Evaluate (in chunks) <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span> at <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span>.</li>
 </ul>
 </li>
-<li>Absorb and produce zeta
+<li><strong>Switch sponge</strong>. (TODO: why do we switch sponge?)
 <ul>
-<li>absorb commitment of t (unshifted)</li>
-<li>absorb a number of dummy group elements = (0, 0), exactly <code>max_t_size - t_comm.0.unshifted.len() of them</code>. Why? This looks like padding.</li>
-<li>if t_comm.shifted is zero, then absorb dummy again, otherwise absorb t_comm.shifted</li>
-<li>squeeze to obtain zeta challenge</li>
-<li>use ScalarChallenge::to_field with endo_r to obtain zeta’ (why? we don’t always scalar mul with zeta no?)</li>
+<li>Save the state of the sponge as <code>fq_sponge_before_evaluations</code> for the proof.</li>
+<li>Create an <code>FrSponge</code> with <code>cs.fr_sponge_params</code></li>
+<li>Squeeze the fq_sponge, convert the field element to Fr, and absorb that field element with the fr_sponge (TODO: specify the conversion)</li>
 </ul>
 </li>
-<li>Evaluate the committed polynomials (witness and quotient) at zeta
+<li><strong>Evaluate the public input at <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span></strong>.</li>
+<li><strong>Absorb the public input and the chunked evaluations and produce the challenges <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">u</span></span></span></span> using the Fr Sponge</strong>
 <ul>
-<li>compute zeta * omega (where omega is the generator of the domain d1)</li>
+<li>absorb the evaluations at <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span></span></span></span> of:
+<ul>
+<li>public input <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span> (TODO: why do we re-absorb the public input?)</li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span> (TODO: what about the rest? This is for 5-wires)</li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span></span></span></span> (TODO: what about the rest? This is for 5-wires)</li>
+<li>(TODO: what about s_4?)</li>
 </ul>
 </li>
-<li>Compute and evaluate the linearization polynomial, (what’s that again?)</li>
-<li>Query opening scalar challenges
+<li>absorb the evaluations at <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span> of:
 <ul>
-<li>squeeze v and create v’ with the endo technique</li>
-<li>squeeze u and create u’ with the endo technique</li>
+<li>public input <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span> (TODO: what about the rest? This is for 5-wires)</li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span></li>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span> (TODO: what about the rest? This is for 5-wires)</li>
+<li>(TODO: what about s_4?)</li>
 </ul>
 </li>
-<li>Compute the opening proof (ok that’s where we aggregate all the openings and what’s to prove)
+<li>squeeze the v challenge and create <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span> from it using the endomorphism (TODO: specify)</li>
+<li>squeeze the u challenge and create <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">u</span></span></span></span> from it using the endomorphism (TODO: specify)</li>
+</ul>
+</li>
+<li>Compute the aggregated evaluation proof for evaluation points <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span> of the following polynomials (TODO: specify how). Use <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">u</span></span></span></span> as TKTK.
 <ul>
-<li>prev_challenges { chals, comm } -&gt; (???, comm.unshifted.len())</li>
-<li>non_hiding = commitment of zero?</li>
+<li>the prev_challenges (TODO: specify)</li>
+<li>the public polynomial <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">p</span></span></span></span></li>
+<li>the 15 witness polynomials <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">4</span></span></span></span></li>
+<li>the permutation poylnomial <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span></li>
+<li>the quotient polynomial <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span></li>
+</ul>
+</li>
+<li>Set the final proof to: (TODO: shouldn’t it contain a hash of the constraint system/circuit as an identifier as well? there could be attacks when you try to verify a wrong proof with a malicious or wrong constraint system?)
+<ul>
+<li>commitments are the commitments to:
+<ul>
+<li>the 15 witness polynomials <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">4</span></span></span></span></li>
+<li>the permutation polynomial <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span></li>
+<li>the quotient polynomial <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathnormal">t</span></span></span></span></li>
+</ul>
+</li>
+<li>the evaluation proof</li>
+<li>the chunked evaluations of
+<ul>
+<li>s</li>
+<li>w</li>
+<li>z</li>
+<li>t</li>
+<li>f</li>
+</ul>
+</li>
+<li>the public inputs</li>
+<li>prev_challenges (TODO: specify)</li>
 </ul>
 </li>
 </ol>
 <h2 id="proof-verification"><a class="header" href="#proof-verification">Proof Verification</a></h2>
+<p>Given:</p>
+<ul>
+<li>group_map</li>
+<li>a vector of proofs:
+<ul>
+<li>a number of commitments</li>
+<li>a proof</li>
+<li>and a verifier index containing:
+<ul>
+<li>domain</li>
+<li>max_poly_size</li>
+<li>max_quote_size</li>
+<li>SRS</li>
+<li>pre-computed commitments:
+<ul>
+<li>sigma_comm</li>
+<li>qw_comm</li>
+<li>qm_comm</li>
+<li>qc_comm</li>
+<li>rcm_comm</li>
+<li>psm_comm</li>
+<li>add_comm</li>
+<li>double_comm</li>
+<li>mul_comm</li>
+<li>emul_comm</li>
+</ul>
+</li>
+<li>shifts</li>
+<li>zero-knowledge polynomial</li>
+<li>w</li>
+<li>endo</li>
+<li>fr_sponge_params</li>
+<li>fq_sponge_params</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>do:</p>
 <ul>
 <li>
 <p>if the length of the proofs is 0, return true</p>
@@ -510,20 +814,20 @@ g. scalar multiplication</li>
 <li>check the linearization polynomial consistency (probably <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">Z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span>)
 <ul>
 <li>
-<p>public(\z) = 0 or the evaluation of the public polynomial at \z if there’s a public input</p>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal">u</span><span class="mord mathnormal">b</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> or the evaluation of the public polynomial at <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span></span></span></span> if there’s a public input</p>
 </li>
 <li>
-<p>missing_perm = (w<a href="specs/%5Cz">6</a> + \gamma) \cdot z(\omega\z) \cdot \alpha^{PERM0} \cdot zkpm(\z) \cdot \sum_{i=0}^5 (\beta \cdot s<a href="specs/%5Cz">i</a>)  + witness[i] + \gamma
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9695199999999999em;vertical-align:-0.31em;"></span><span class="mord mathnormal">mi</span><span class="mord mathnormal">ss</span><span class="mord mathnormal">in</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord">6</span><span class="mclose">]</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">PERM</span><span class="mord mtight">0</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">p</span><span class="mord mathnormal">m</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.253718em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">5</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">))</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mord mathnormal">i</span><span class="mord mathnormal">t</span><span class="mord mathnormal">n</span><span class="mord mathnormal">ess</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span></span></span></span>
 // only involves the witness that are part of the permutation argument (7 of them)</p>
 </li>
 <li>
-<p>missing_perm2 = \alpha^{PERM0} \cdot zkpm(\z) \cdot z(\z) \cdot \sum_{i=0}^6 (\gamma + \beta \cdot \z \cdot shift[i] + w[i]) // shift is for the cosets</p>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9695199999999999em;vertical-align:-0.31em;"></span><span class="mord mathnormal">mi</span><span class="mord mathnormal">ss</span><span class="mord mathnormal">in</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal">m</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">PERM</span><span class="mord mtight">0</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">p</span><span class="mord mathnormal">m</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.253718em;vertical-align:-0.29971000000000003em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">6</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05556em;">γ</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">hi</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">])</span></span></span></span> // shift is for the cosets</p>
 </li>
 <li>
-<p>left = [f(\z) + public(\z) - missing_perm + missing_perm2 - t(\z) \cdot (\z^n - 1)](\z - \omega^{n-3})(\z - 1)</p>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal">u</span><span class="mord mathnormal">b</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.9695199999999999em;vertical-align:-0.31em;"></span><span class="mord mathnormal">mi</span><span class="mord mathnormal">ss</span><span class="mord mathnormal">in</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord" style="margin-right:0.02778em;"><em></span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.9695199999999999em;vertical-align:-0.31em;"></span><span class="mord mathnormal">mi</span><span class="mord mathnormal">ss</span><span class="mord mathnormal">in</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord" style="margin-right:0.02778em;"></em></span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal">m</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)]</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></p>
 </li>
 <li>
-<p>right = [(\z^n - 1) \cdot \alpha^{PERM1} \cdot (\z - \omega^{n-3}) + (\z^n - 1) \cdot \alpha^{PERM2} \cdot (\z - 1)] (1 - z(\z))</p>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">PERM</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">PERM</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)]</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07378em;">ζ</span><span class="mclose">))</span></span></span></span></p>
 </li>
 <li>
 <p>ensure <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">h</span><span class="mord mathnormal">t</span></span></span></span></p>
@@ -538,7 +842,14 @@ g. scalar multiplication</li>
 </li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="custom-gates"><a class="header" href="#custom-gates">Custom gates</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="generic"><a class="header" href="#generic">Generic</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="poseidon"><a class="header" href="#poseidon">Poseidon</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 <h1 id="poseidon-hash"><a class="header" href="#poseidon-hash">Poseidon hash</a></h1>
+<p><strong>THIS IS WORK-IN-PROGRESS</strong></p>
 <p>A hash function that is efficient for zk-SNARKs. It is based on the sponge function, with a state composed of field elements and a permutation based on field element operation (addition and exponentiation).</p>
 <p>The perumtation is built like SPN block ciphers, with an S-box (exponentiation a group element), adding constants to the state, and matrix multiplication of the state (multiplications and additions) with an MDS matrix.</p>
 <p>Since a field element is around 255-bit, a single field element is enough as the capacity of the sponge. The state is therefore often small, with our state being 4 field elements and a rate of 3 field elements.</p>
@@ -596,7 +907,7 @@ But in our code, because of the cycles:</p>
 <li>arkworks generator: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mclose">)</span></span></span></span></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-<h1 id="overview-1"><a class="header" href="#overview-1">Overview</a></h1>
+<h1 id="overview-2"><a class="header" href="#overview-2">Overview</a></h1>
 <p>The proof system in Mina is a variant of <a href="crypto/plonk/">PLONK</a>. To understand PLONK, you can refer to our <a href="https://www.youtube.com/watch?v=RUZcam_jrz0&amp;list=PLBJMt6zV1c7Gh9Utg-Vng2V6EYVidTFCC">series of videos</a> on the scheme.
 In this section we explain our variant, called <strong>15-wires</strong>.</p>
 <p>15-wires is not formally a zk-SNARK, as it is not succinct in the proof size. zk-SNARKs must a <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> proof size where n is the number of gates in the circuit. (In practice, our proofs are in the order of dozens of kilobytes).</p>
@@ -673,7 +984,7 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
 c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">rH</span></span></span></span>.</p>
 <div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-<h1 id="polynomial-commitments"><a class="header" href="#polynomial-commitments">polynomial commitments</a></h1>
+<h1 id="polynomial-commitments-1"><a class="header" href="#polynomial-commitments-1">polynomial commitments</a></h1>
 <p>A polynomial commitment is a scheme that allows you to commit to a polynomial (i.e. to its coefficients). Later, someone can ask you to evaluate the polynomial at some point and give them the result, which you can do as well as provide a proof of correct evaluation.</p>
 <img src="crypto/plonk/../../img/polycom.png" width="600px">
 <h2 id="schwartz-zipple-lemma"><a class="header" href="#schwartz-zipple-lemma">Schwartz-Zipple lemma</a></h2>
