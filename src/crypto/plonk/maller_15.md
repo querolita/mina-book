@@ -82,7 +82,6 @@ Now here's how we need to modify the current protocol:
 4. While the verifier knows the evaluation of $\bar L(\zeta)$ (it's supposed to be $0$), they don't know the evaluation of $\bar L(\zeta \omega)$, so the prover needs to send that.
 5. The verifier must recreate $com(\bar L)$, the commitment to $\bar L$, themselves so that they can verify the evaluation proofs of both $\bar L(\zeta)$ and $\bar L(\zeta\omega)$.
 6. TODO: omega stuff?
-7. TODO: Do we still need to check an upperbound on $t$?
 
 ![maller 15 2](../../img/maller_15_2.png)
 <!--
