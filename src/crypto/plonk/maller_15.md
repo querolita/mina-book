@@ -62,6 +62,26 @@ $$
 com(\bar L) = com(L_0) + \zeta^n \cdot com(L_1) + \zeta^{2n} \cdot com(L_2) + \cdots
 $$
 
+The implementation we use:
+
+```rust
+fn chunk_commitment<C: AffineCurve>(zeta_n: C::ScalarField, f: &PolyComm<C>) -> PolyComm<C> {
+    let mut res = C::Projective::zero();
+    // use Horner's to compute chunk[0] + z^n chunk[1] + z^2n chunk[2] + ...
+    // as ( chunk[-1] * z^n + chunk[-2] ) * z^n + chunk[-3]
+    // (https://en.wikipedia.org/wiki/Horner%27s_method)
+    for chunk in f.unshifted.iter().rev() {
+        res *= zeta_n;
+        res.add_assign_mixed(chunk)
+    }
+
+    PolyComm {
+        unshifted: vec![res.into_affine()],
+        shifted: f.shifted,
+    }
+}
+```
+
 ### The prover side
 
 This means that the **prover** will produce evaluation proofs on the following linearized polynomial:
@@ -71,6 +91,52 @@ $$
 $$
 
 which is the same as $L(x)$ only if evaluated at $\zeta$. As the previous section pointed out, we will need $\bar L(\zeta \omega)$ and $\bar L(\zeta \omega) \neq L(\zeta \omega)$.
+
+The implementation we use:
+
+```rust
+fn chunk_polynomial<F: Field>(zeta_n: F, n: usize, f: DensePolynomial<F>) -> DensePolynomial<F> {
+    let chunks = (f.coeffs.len() + n - 1) / n;
+    let mut scale = F::one();
+    let mut coeffs = vec![F::zero(); n];
+
+    for chunk in coeffs.chunks(n) {
+        for (j, c) in chunk.iter().enumerate() {
+            coeffs[j] += scale * c;
+        }
+        scale *= zeta_n;
+    }
+
+    DensePolynomial { coeffs }
+}
+```
+
+## Commitment randomness
+
+We have the following polynomial:
+
+$$
+ft = \bar f - (\zeta^n - 1) \bar t
+$$
+
+After we construct the chunked commitment $ft$, to create an evaluation proof, we need to know the randomness associated with that commitment $r_{ft}$. To find that, there are two rules:
+
+* adding two commitment together, the randomness get added as well. $com(a) + com(b) \implies r_a + r_b$
+* scaling a commitment, the randomness gets scalled too. $n \cdot com(a) \implies n \cdot r_a$
+
+As such, if we know $r_f$ and $r_t$, we can compute: 
+
+$$
+r_{ft} = r_f + (\zeta^n-1) \cdot r_t
+$$
+
+How do we apply this?
+
+We know the randomness of the commitment to $t$, as we committed to it. But what about $f$? We never commit to it really, and the verifier recreates it from scratch using:
+
+1. **The commitments we sent them**. In the linearization process, the verifier actually gets rid of most prover commitments, except for the commitment to the permutation polynomial $z$. Thus, we will have to use $r_z$, the randomness associated to that commitment.
+2. **The public commitments**. Think commitment to selector polynomials or the public input polynomial. These commitments are not blinded, and thus do not impact the calculation of the randomness.
+3. **The evaluations we sent them**. Instead of using commitments to the wires when recreating $f$, the verifier uses the (verified) evaluations of these in $\zeta$. If we scale our commitment $com(z)$ with any of these scalars, we will have to do the same with $r_z$.
 
 ## The actual protocol changes
 
@@ -103,3 +169,4 @@ The prover actually does not send a commitment to the full $f$ polynomial. As de
 
 1. Should we do the same here? This means that the verifier will have to compute the evaluation of $\bar L(\zeta)$ because it won't be zero.
 2. or should we compute a commitment of $\bar L$ using the full polynomial $f$? This means the verifier will have to do more effort when computing the commitment of $f$ (and thus of $\bar L$).
+

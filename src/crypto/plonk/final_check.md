@@ -94,7 +94,7 @@ $$
 & \color{blue}{(w[6](\zeta) + \gamma) +} \\
 & \color{purple}{(z(\zeta) - 1) L_1(\zeta) \alpha^{PERM1} +} \\
 & \color{darkblue}{(z(\zeta) - 1) L_{n-k}(\zeta) \alpha^{PERM2}} \\
-& = t(\zeta)(z^n - 1)
+& = t(\zeta)(\zeta^n - 1)
 \end{align}
 $$
 
@@ -120,7 +120,7 @@ $$
 & (w[4](\zeta) + \beta \cdot \sigma[4](\zeta) + \gamma) \cdot \\
 & (w[5](\zeta) + \beta \cdot \sigma[5](\zeta) + \gamma) \cdot \\
 & (w[6](\zeta) + \gamma) + \\
-& \color{darkred}{- t(\zeta)(z^n - 1)} \\
+& \color{darkred}{- t(\zeta)(\zeta^n - 1)} \\
 & = \color{darkred}{(1 - z(\zeta)) L_1(\zeta) \alpha^{PERM1} +} \\
 & \color{darkred}{(1 - z(\zeta)) L_{n-k}(\zeta) \alpha^{PERM2}} \\
 \end{align}
@@ -147,7 +147,7 @@ $$
 & (w[4](\zeta) + \beta \cdot \sigma[4](\zeta) + \gamma) \cdot \\
 & (w[5](\zeta) + \beta \cdot \sigma[5](\zeta) + \gamma) \cdot \\
 & (w[6](\zeta) + \gamma) + \\
-& - t(\zeta)(z^n - 1) \\
+& - t(\zeta)(\zeta^n - 1) \\
 & = \color{darkred}{(1 - z(\zeta))[\frac{(\zeta^n - 1)}{n(\zeta - 1)} \alpha^{PERM1} + \frac{\omega^{n-k}(\zeta^n - 1)}{n(\zeta - \omega^{n-k})} \alpha^{PERM2}]}
 \end{align}
 $$
@@ -174,7 +174,7 @@ $$
 & \; (w[4](\zeta) + \beta \cdot \sigma[4](\zeta) + \gamma) \cdot \\
 & \; (w[5](\zeta) + \beta \cdot \sigma[5](\zeta) + \gamma) \cdot \\
 & \; (w[6](\zeta) + \gamma) + \\
-& \; - t(\zeta)(z^n - 1) \\
+& \; - t(\zeta)(\zeta^n - 1) \\
 & \color{darkred}{] \cdot (\zeta - 1)(\zeta - \omega^{n-k})} & \\
 & = \color{darkred}{(1 - z(\zeta))[\frac{(\zeta^n - 1)(\zeta - \omega^{n-k})}{n} \alpha^{PERM1} + \frac{\omega^{n-k}(\zeta^n - 1)(\zeta - 1)}{n} \alpha^{PERM2}]}
 \end{align}
