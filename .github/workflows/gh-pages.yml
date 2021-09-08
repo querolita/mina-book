@@ -12,6 +12,15 @@ jobs:
       - name: get code
         uses: actions/checkout@v2
 
+      - name: set up rust (for cache)
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+
+      - name: set up cache for rust
+        uses: Swatinem/rust-cache@v1
+
       - name: Build
         run: |
           cargo install mdbook
