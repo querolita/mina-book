@@ -100,7 +100,7 @@ fn chunk_polynomial<F: Field>(zeta_n: F, n: usize, f: DensePolynomial<F>) -> Den
     let mut scale = F::one();
     let mut coeffs = vec![F::zero(); n];
 
-    for chunk in coeffs.chunks(n) {
+    for chunk in f.coeffs.chunks(n) {
         for (j, c) in chunk.iter().enumerate() {
             coeffs[j] += scale * c;
         }
