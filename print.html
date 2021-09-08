@@ -2345,7 +2345,7 @@ Then we have that </p>
     let mut scale = F::one();
     let mut coeffs = vec![F::zero(); n];
 
-    for chunk in coeffs.chunks(n) {
+    for chunk in f.coeffs.chunks(n) {
         for (j, c) in chunk.iter().enumerate() {
             coeffs[j] += scale * c;
         }
