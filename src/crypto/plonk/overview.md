@@ -2,6 +2,7 @@
 
 The proof system in Mina is a variant of [PLONK](). To understand PLONK, you can refer to our [series of videos](https://www.youtube.com/watch?v=RUZcam_jrz0&list=PLBJMt6zV1c7Gh9Utg-Vng2V6EYVidTFCC) on the scheme.
 In this section we explain our variant, called **15-wires**.
+<!-- TODO: embed each video in their respective category -->
 
 15-wires is not formally a zk-SNARK, as it is not succinct in the proof size. zk-SNARKs must a $log(n)$ proof size where n is the number of gates in the circuit. (In practice, our proofs are in the order of dozens of kilobytes).
 

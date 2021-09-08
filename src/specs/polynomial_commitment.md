@@ -27,23 +27,45 @@ struct SRS<G: CommitmentCurve> {
 
 ## Committing to a polynomial
 
-The following structure represents a commitment to a polynomial. It is generic, as it can contain curve points, the default for polynomial commitments, or field elements to represent the associated blinding factors.  (TODO: ideally there should be two types: `NonHidingPolycom` and `PolyCom` and specific fields for blinding factors.)
+As a polynomial can be of a degree larger than what can be used with the SRS, polynomials can be **chunked** (into chunks of polynomials of size at most the size of the SRS), and committed separately.
 
 ### Data structures
 
-A polynomial commitment:
+The following structure represents a commitment to a polynomial.
 
 ```rust
 struct PolyCom<CurvePoint> {
+    /// A vector of curve point to represent the chunks of commitments. If only one chunk is needed, this is a single element vector.
     unshifted: Vec<CurvePoint>,
+    /// An optional curve point to represent the last shifted last chunk, in case a proof of upperbound on the degree of the polynomial is requested.
     shifted: Option<CurvePoint>,
 }
 ```
 
-A blinded polynomial commitment:
+It is generic, as it can contain curve points, the default for polynomial commitments, or field elements to represent the associated blinding factors.  (TODO: ideally there should be two types: `NonHidingPolycom` and `PolyCom` and specific fields for blinding factors.)
+
+A blinded polynomial commitment can be represented as:
 
 ```rust
 type BlindedPolyCom<CurvePoint, ScalarField> = (PolyCom<CurvePoint>, PolyCom<ScalarField>);
+```
+
+TODO: I propose that we use something like this for a blinded polynomial commitment:
+
+```rust
+struct NonHidingPolyCom(CurvePoint);
+
+type ChunkedNonHidingPolyCom = Vec<NonHidingPolyCom>;
+
+struct PolyCom {
+    commit: CurvePoint,
+    blinding: ScalarField,
+}
+
+struct ChunkedPolyCom {
+    unshifted: Vec<HidingPolyCom>,
+    shifted: Option<CurvePoint>,
+}
 ```
 
 ### Methods

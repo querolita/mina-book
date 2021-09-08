@@ -1,10 +1,12 @@
 # Maller's optimization for 15-wires
 
+This document proposes a protocol change for [15-wires](../../specs/15_wires/15_wires.md).
+
 ## What is Maller's optimization?
 
 See the [section on Maller's optimization](maller.md) for background.
 
-## If $t$ was not split
+## Overview
 
 We want the verifier to form commitment to the following polynomial:
 
@@ -33,11 +35,9 @@ Note right of Verifier: verifies the evaluation proof \n to check that L(zeta) =
 ```
 -->
 
-## Inner product stuff
+In the rest of this document, we review the details and considerations needed to implement this change in [15-wires](../../specs/15_wires/15_wires.md).
 
-because we use the inner product polynomial commitment we also need $L(\zeta \omega)$ which will be a different value than zero because of the vaniashing polynomial: $L(\zeta \omega) = f(\zeta \omega) - Z_H(\zeta) \cdot t(\zeta \omega) \neq 0$. That evaluation must be sent as well as part of the proof.
-
-## How to deal with $t$?
+## How to deal with a chunked $t$?
 
 There's one challenge that prevents us from directly using this approach: $com(t)$ is typically sent and received in several commitments (called chunks or segments throughout the codebase). As $t$ is the largest polynomial, usually exceeding the size of the SRS (which is by default set to be the size of the domain).
 
@@ -59,84 +59,83 @@ $$
 Which the verifier can't produce because of the powers of $x^n$, but we can linearize it as we already know which $x$ we're going to evaluate that polynomial with:
 
 $$
-com(\bar L) = com(L_0) + \zeta^n \cdot com(L_1) + \zeta^{2n} \cdot com(L_2) + \cdots
+com(\tilde L) = com(L_0) + \zeta^n \cdot com(L_1) + \zeta^{2n} \cdot com(L_2) + \cdots
 $$
-
-The implementation we use:
-
-```rust
-fn chunk_commitment<C: AffineCurve>(zeta_n: C::ScalarField, f: &PolyComm<C>) -> PolyComm<C> {
-    let mut res = C::Projective::zero();
-    // use Horner's to compute chunk[0] + z^n chunk[1] + z^2n chunk[2] + ...
-    // as ( chunk[-1] * z^n + chunk[-2] ) * z^n + chunk[-3]
-    // (https://en.wikipedia.org/wiki/Horner%27s_method)
-    for chunk in f.unshifted.iter().rev() {
-        res *= zeta_n;
-        res.add_assign_mixed(chunk)
-    }
-
-    PolyComm {
-        unshifted: vec![res.into_affine()],
-        shifted: f.shifted,
-    }
-}
-```
 
 ### The prover side
 
 This means that the **prover** will produce evaluation proofs on the following linearized polynomial:
 
 $$
-\bar L(x) = 1 \cdot L_0(x) + \zeta^n \cdot L_1(x) + \zeta^{2n} \cdot L_2(x) + \cdots
+\tilde L(x) = 1 \cdot L_0(x) + \zeta^n \cdot L_1(x) + \zeta^{2n} \cdot L_2(x) + \cdots
 $$
 
-which is the same as $L(x)$ only if evaluated at $\zeta$. As the previous section pointed out, we will need $\bar L(\zeta \omega)$ and $\bar L(\zeta \omega) \neq L(\zeta \omega)$.
+which is the same as $L(x)$ only if evaluated at $\zeta$. As the previous section pointed out, we will need $\tilde L(\zeta \omega)$ and $\tilde L(\zeta \omega) \neq L(\zeta \omega)$.
 
-The implementation we use:
+## Evaluation proof and blinding factors
 
-```rust
-fn chunk_polynomial<F: Field>(zeta_n: F, n: usize, f: DensePolynomial<F>) -> DensePolynomial<F> {
-    let chunks = (f.coeffs.len() + n - 1) / n;
-    let mut scale = F::one();
-    let mut coeffs = vec![F::zero(); n];
-
-    for chunk in f.coeffs.chunks(n) {
-        for (j, c) in chunk.iter().enumerate() {
-            coeffs[j] += scale * c;
-        }
-        scale *= zeta_n;
-    }
-
-    DensePolynomial { coeffs }
-}
-```
-
-## Commitment randomness
-
-We have the following polynomial:
+To create an evaluation proof, the prover also needs to produce the blinding factor $r_{L}$ associated with the chunked commitment of:
 
 $$
-ft = \bar f - (\zeta^n - 1) \bar t
+\tilde L = \tilde f - (\zeta^n - 1) \tilde t
 $$
 
-After we construct the chunked commitment $ft$, to create an evaluation proof, we need to know the randomness associated with that commitment $r_{ft}$. To find that, there are two rules:
+To compute it, there are two rules to follow:
 
-* adding two commitment together, the randomness get added as well. $com(a) + com(b) \implies r_a + r_b$
-* scaling a commitment, the randomness gets scalled too. $n \cdot com(a) \implies n \cdot r_a$
+* when two commitment are **added** together, their associated blinding factors get added as well:
+    $$com(a) + com(b) \implies r_a + r_b$$
+* when **scaling** a commitment, its blinding factor gets scalled too:
+    $$n \cdot com(a) \implies n \cdot r_a$$
 
 As such, if we know $r_f$ and $r_t$, we can compute: 
 
 $$
-r_{ft} = r_f + (\zeta^n-1) \cdot r_t
+r_{\tilde L} = r_{\tilde f} + (\zeta^n-1) \cdot r_{\tilde t}
 $$
 
-How do we apply this?
+The prover knows the blinding factor of the commitment to $t$, as they committed to it. But what about $f$? They never commit to it really, and the verifier recreates it from scratch using:
 
-We know the randomness of the commitment to $t$, as we committed to it. But what about $f$? We never commit to it really, and the verifier recreates it from scratch using:
-
-1. **The commitments we sent them**. In the linearization process, the verifier actually gets rid of most prover commitments, except for the commitment to the permutation polynomial $z$. Thus, we will have to use $r_z$, the randomness associated to that commitment.
-2. **The public commitments**. Think commitment to selector polynomials or the public input polynomial. These commitments are not blinded, and thus do not impact the calculation of the randomness.
+1. **The commitments we sent them**. In the linearization process, the verifier actually gets rid of most prover commitments, except for the commitment to the last sigma commitment $S_{\sigma6}$. (TODO: link to the relevant part in the spec) As this commitment is public, it is not blinded.
+2. **The public commitments**. Think commitment to selector polynomials or the public input polynomial. These commitments are not blinded, and thus do not impact the calculation of the blinding factor.
 3. **The evaluations we sent them**. Instead of using commitments to the wires when recreating $f$, the verifier uses the (verified) evaluations of these in $\zeta$. If we scale our commitment $com(z)$ with any of these scalars, we will have to do the same with $r_z$.
+
+Thus, the blinding factor of $\tilde L$ is  $(\zeta^n-1) \cdot r_{\tilde t}$.
+
+## The evaluation of $\tilde L$
+
+The prover actually does not send a commitment to the full $f$ polynomial. As described in the [last check section](final_check.md). The verifier will have to compute the evaluation of $\tilde L(\zeta)$ because it won't be zero.
+It should be equal to the following:
+
+$$
+\begin{align}
+& \tilde f(\zeta) - \tilde t(\zeta)(\zeta^n - 1) = \\
+& \frac{1 - z(\zeta)}{(\zeta - 1)(\zeta - \omega^{n-k})}\left[ \frac{(\zeta^n - 1)(\zeta - \omega^{n-k})}{n} \alpha^{PERM1} + \frac{\omega^{n-k}(\zeta^n - 1)(\zeta - 1)}{n} \alpha^{PERM2} \right] \\
+& - pub(\zeta) \\
+& \; - z(\zeta) \cdot zkpm(\zeta) \cdot \alpha^{PERM0} \cdot \\
+& \; (w[0](\zeta) + \beta \cdot \text{shift}[0] \zeta + \gamma) \cdot \\
+& \; (w[1](\zeta) + \beta \cdot \text{shift}[1] \zeta + \gamma) \cdot \\
+& \; (w[2](\zeta) + \beta \cdot \text{shift}[2] \zeta + \gamma) \cdot \\
+& \; (w[3](\zeta) + \beta \cdot \text{shift}[3] \zeta + \gamma) \cdot \\
+& \; (w[4](\zeta) + \beta \cdot \text{shift}[4] \zeta + \gamma) \cdot \\
+& \; (w[5](\zeta) + \beta \cdot \text{shift}[5] \zeta + \gamma) \cdot \\
+& \; (w[6](\zeta) + \beta \cdot \text{shift}[6] \zeta + \gamma) + \\
+& \; + z(\zeta \omega) \cdot zkpm(\zeta) \cdot \alpha^{PERM0} \cdot \\
+& \; (w[0](\zeta) + \beta \cdot \sigma[0](\zeta) + \gamma) \cdot \\
+& \; (w[1](\zeta) + \beta \cdot \sigma[1](\zeta) + \gamma) \cdot \\
+& \; (w[2](\zeta) + \beta \cdot \sigma[2](\zeta) + \gamma) \cdot \\
+& \; (w[3](\zeta) + \beta \cdot \sigma[3](\zeta) + \gamma) \cdot \\
+& \; (w[4](\zeta) + \beta \cdot \sigma[4](\zeta) + \gamma) \cdot \\
+& \; (w[5](\zeta) + \beta \cdot \sigma[5](\zeta) + \gamma) \cdot \\
+& \; (w[6](\zeta) + \gamma) + \\
+\end{align}
+$$
+
+Because we use the [inner product polynomial commitment](../../specs/polynomial_commitment.md), we also need:
+
+$$
+\tilde L(\zeta \omega) = \tilde f(\zeta \omega) - Z_H(\zeta) \cdot \tilde t(\zeta \omega)
+$$
+Notice the $Z_H(\zeta)$. That evaluation must be sent as part of the proof as well.
 
 ## The actual protocol changes
 
@@ -144,10 +143,10 @@ Now here's how we need to modify the current protocol:
 
 1. The evaluations $f(\zeta), f(\zeta \omega), t(\zeta), t(\zeta \omega)$ don't have to be part of the proof anymore.
 2. The prover must still send the chunked commitments to $t$.
-3. The prover must create a linearized polynomial $\bar L$ by creating a linearized polynomial $\bar f$ and a linearized polynomial $\bar t$
-4. While the verifier knows the evaluation of $\bar L(\zeta)$ (it's supposed to be $0$), they don't know the evaluation of $\bar L(\zeta \omega)$, so the prover needs to send that.
-5. The verifier must recreate $com(\bar L)$, the commitment to $\bar L$, themselves so that they can verify the evaluation proofs of both $\bar L(\zeta)$ and $\bar L(\zeta\omega)$.
-6. TODO: omega stuff?
+3. The prover must create a linearized polynomial $\tilde L$ by creating a linearized polynomial $\tilde f$ and a linearized polynomial $\tilde t$ and computing:
+    $$\tilde L = \tilde f + (\zeta^n-1) \cdot \tilde t$$
+4. While the verifier can compute the evaluation of $\tilde L(\zeta)$ by themselves, they don't know the evaluation of $\tilde L(\zeta \omega)$, so the prover needs to send that.
+5. The verifier must recreate $com(\tilde L)$, the commitment to $\tilde L$, themselves so that they can verify the evaluation proofs of both $\tilde L(\zeta)$ and $\tilde L(\zeta\omega)$.
 
 ![maller 15 2](../../img/maller_15_2.png)
 <!--
@@ -163,10 +162,8 @@ Note right of Verifier: verifies the evaluation proof \n to check that L_bar(zet
 ```
 -->
 
-## One last thing
+The proposal is implemented in [#150](https://github.com/o1-labs/proof-systems/pull/150) with the following details:
 
-The prover actually does not send a commitment to the full $f$ polynomial. As described in the [last check section](final_check.md). This leaves us two options:
-
-1. Should we do the same here? This means that the verifier will have to compute the evaluation of $\bar L(\zeta)$ because it won't be zero.
-2. or should we compute a commitment of $\bar L$ using the full polynomial $f$? This means the verifier will have to do more effort when computing the commitment of $f$ (and thus of $\bar L$).
-
+* the $\tilde L$ polynomial is called $ft$.
+* the evaluation of $\tilde L(\zeta)$ is called $ft_eval0$.
+* the evaluation $\tilde L(\zeta\omega)$ is called $ft_eval1$
