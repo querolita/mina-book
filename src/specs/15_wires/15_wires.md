@@ -423,14 +423,18 @@ do:
     - compute the public input commitment as $- public[1] \cdot L_1(x) - proof.public[2] \cdot L_2(x) - \cdots$ where $L_i$ are lagrange bases.
     - run the [Oracles function](#oracles) to obtain all the challenges.
     - compute the linearization polynomial commitment $com(f)$ required to check the opening proofs as the addition of the following polynomial commitments. For every chunked commitment, this means that they have to be recombined with the correct powers of $\zeta^n$ or $(\zeta\omega)^n$.
-        - permutation
-        - generic
-        - poseidon
-        - EC addition
-        - EC doubling
-        - endoscalar multiplication
-        - scalar multiplication
-        - TODO: what about the public commitment?
+    
+        The commitment to $\text{truncated}(f)$ is computed as the addition of the following curve points:
+        $$\text{Permutation} + \text{Generic} + \text{Poseidon} + \text{EC\_Add} + \text{EC\_double} + \text{EC\_scalarmul} + \text{Endo\_scalarmul}$$
+        These curve points are computed as the scalar multiplication of a linearized part with public commitments as defined below.
+        As an optimization, the $f$ polynomial can be computed as the multi-scalar multiplication of the scalars the commitments listed below.
+        - [permutation](./permutation.md#commitment-part)
+        - [generic](./generic.md#verifier-construction)
+        - [poseidon](./poseidon.md)
+        - [EC addition]()
+        - [EC doubling]()
+        - [EC scalar multiplication]()
+        - [Endo scalar multiplication]()
 5. batch verify all the evaluation proofs (TODO: specify)
 <!-- 5. Now we should have:
    1. p_eval -> public evaluation

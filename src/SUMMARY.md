@@ -6,9 +6,9 @@
 
 - [Polynomial commitment](./specs/polynomial_commitment.md)
 - [15-wires](./specs/15_wires/15_wires.md)
-  - [Custom gates](./specs/15_wires/custom_gates.md)
-    - [Generic](./specs/15_wires/generic.md)
-    - [Poseidon](./specs/15_wires/poseidon.md)
+  - [Permutation](./specs/15_wires/permutation.md)
+  - [Generic](./specs/15_wires/generic.md)
+  - [Poseidon](./specs/15_wires/poseidon.md)
 - [Poseidon hash](./specs/poseidon.md)
 - [Pasta curves](./specs/pasta_curves.md)
 - [Consensus]()
