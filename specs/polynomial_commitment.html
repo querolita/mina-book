@@ -162,23 +162,45 @@
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="committing-to-a-polynomial"><a class="header" href="#committing-to-a-polynomial">Committing to a polynomial</a></h2>
-<p>The following structure represents a commitment to a polynomial. It is generic, as it can contain curve points, the default for polynomial commitments, or field elements to represent the associated blinding factors.  (TODO: ideally there should be two types: <code>NonHidingPolycom</code> and <code>PolyCom</code> and specific fields for blinding factors.)</p>
+<p>As a polynomial can be of a degree larger than what can be used with the SRS, polynomials can be <strong>chunked</strong> (into chunks of polynomials of size at most the size of the SRS), and committed separately.</p>
 <h3 id="data-structures"><a class="header" href="#data-structures">Data structures</a></h3>
-<p>A polynomial commitment:</p>
+<p>The following structure represents a commitment to a polynomial.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>struct PolyCom&lt;CurvePoint&gt; {
+    /// A vector of curve point to represent the chunks of commitments. If only one chunk is needed, this is a single element vector.
     unshifted: Vec&lt;CurvePoint&gt;,
+    /// An optional curve point to represent the last shifted last chunk, in case a proof of upperbound on the degree of the polynomial is requested.
     shifted: Option&lt;CurvePoint&gt;,
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>A blinded polynomial commitment:</p>
+<p>It is generic, as it can contain curve points, the default for polynomial commitments, or field elements to represent the associated blinding factors.  (TODO: ideally there should be two types: <code>NonHidingPolycom</code> and <code>PolyCom</code> and specific fields for blinding factors.)</p>
+<p>A blinded polynomial commitment can be represented as:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>type BlindedPolyCom&lt;CurvePoint, ScalarField&gt; = (PolyCom&lt;CurvePoint&gt;, PolyCom&lt;ScalarField&gt;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>TODO: I propose that we use something like this for a blinded polynomial commitment:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct NonHidingPolyCom(CurvePoint);
+
+type ChunkedNonHidingPolyCom = Vec&lt;NonHidingPolyCom&gt;;
+
+struct PolyCom {
+    commit: CurvePoint,
+    blinding: ScalarField,
+}
+
+struct ChunkedPolyCom {
+    unshifted: Vec&lt;HidingPolyCom&gt;,
+    shifted: Option&lt;CurvePoint&gt;,
+}
 <span class="boring">}
 </span></code></pre></pre>
 <h3 id="methods"><a class="header" href="#methods">Methods</a></h3>
