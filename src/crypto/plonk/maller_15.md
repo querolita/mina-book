@@ -141,12 +141,13 @@ Notice the $Z_H(\zeta)$. That evaluation must be sent as part of the proof as we
 
 Now here's how we need to modify the current protocol:
 
-1. The evaluations $f(\zeta), f(\zeta \omega), t(\zeta), t(\zeta \omega)$ don't have to be part of the proof anymore.
+1. The evaluations $f(\zeta), f(\zeta \omega), t(\zeta), t(\zeta \omega)$ (and their corresponding evaluation proofs) don't have to be part of the protocol anymore.
 2. The prover must still send the chunked commitments to $t$.
 3. The prover must create a linearized polynomial $\tilde L$ by creating a linearized polynomial $\tilde f$ and a linearized polynomial $\tilde t$ and computing:
     $$\tilde L = \tilde f + (\zeta^n-1) \cdot \tilde t$$
 4. While the verifier can compute the evaluation of $\tilde L(\zeta)$ by themselves, they don't know the evaluation of $\tilde L(\zeta \omega)$, so the prover needs to send that.
 5. The verifier must recreate $com(\tilde L)$, the commitment to $\tilde L$, themselves so that they can verify the evaluation proofs of both $\tilde L(\zeta)$ and $\tilde L(\zeta\omega)$.
+6. The evaluation of $\tilde L(\zeta \omega)$ must be absorbed in both sponges (Fq and Fr).
 
 ![maller 15 2](../../img/maller_15_2.png)
 <!--
