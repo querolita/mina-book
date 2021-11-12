@@ -15,7 +15,7 @@ The poseidon gate implements 5 rounds of the Poseidon permutation, outputing the
 
 ## Polynomial
 
-I only have an explanation for the 3-wires polynomial right now, but it translates pretty well to 15-wires:
+I only have an explanation for the 3-wires polynomial right now, but it translates pretty well to kimchi:
 
 ![](https://i.imgur.com/lneaV7D.jpg)
 
