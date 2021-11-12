@@ -1,6 +1,6 @@
 # Maller's optimization for 15-wires
 
-This document proposes a protocol change for [15-wires](../../specs/15_wires/15_wires.md).
+This document proposes a protocol change for [15-wires](../../specs/kimchi/kimchi.md).
 
 ## What is Maller's optimization?
 
@@ -35,7 +35,7 @@ Note right of Verifier: verifies the evaluation proof \n to check that L(zeta) =
 ```
 -->
 
-In the rest of this document, we review the details and considerations needed to implement this change in [15-wires](../../specs/15_wires/15_wires.md).
+In the rest of this document, we review the details and considerations needed to implement this change in [15-wires](../../specs/kimchi/kimchi.md).
 
 ## How to deal with a chunked $t$?
 

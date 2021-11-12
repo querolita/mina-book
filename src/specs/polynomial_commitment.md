@@ -90,7 +90,7 @@ We define the following three functions:
 
 ## Creating an evaluation proof and verifying it
 
-In section [different functionnalities for polynomial commitments](../crypto/plonk/inner_product_api.html) we saw that you can aggregate evaluation proofs in the following way:
+In section [different functionnalities for polynomial commitments](../crypto/plonk/inner_product_api.html) we saw that you can create a multi evaluation proofs in the following way:
 
 $$
 \langle \vec{f} + v \cdot \vec{g}, \vec{x_1} + u \cdot \vec{x_2} \rangle = f(x_1) + v \cdot g(x_1) + u \cdot (f(x_2) + v \cdot g(x_2))
@@ -109,8 +109,8 @@ struct EvaluatedCommitment {
     chunked_evals: Vec<Vec<ScalarField>>,
 }
 
-/// This struct represents an aggregated evaluation proof for a number of polynomial commitments, as well as a number of evaluation points.
-struct AggregatedEvaluationProof {
+/// This struct represents an multi-evaluation proof for a number of polynomial commitments, as well as a number of evaluation points.
+struct MultiEvaluationProof {
     /// a number of evaluation points
     eval_points: Vec<ScalarField>,
     /// a number of commitments evaluated at these evaluation points
@@ -176,6 +176,8 @@ do:
 
 ### Verifying a polynomial evaluation
 
+Comment taken from the code:
+
 The verifier checks that for all $i$:
 
 $$c_i Q_i + \delta_i = z_{1_i} (G_i + b_i U_i) + z_{2_i} H$$
@@ -203,3 +205,60 @@ r^i \delta_i \\
 - (r^i z_{1_i} b_i) U_i \\
 \end{align}
 $$
+
+---
+
+$$
+\langle \vec{f} + v \cdot \vec{g}, \vec{x_1} + u \cdot \vec{x_2} \rangle = f(x_1) + v \cdot g(x_1) + u \cdot (f(x_2) + v \cdot g(x_2))
+$$
+
+in this notation:
+
+* Fq -> base field (TODO: rename to BaseF)
+* Fr -> scalar field (TODO: rename to ScalarF)
+
+batch_verify(aggregated_proof[])
+
+it verifies in batch (more efficiently) a vector of "multi-evaluation proofs". Which means that each proof in the batch can contain the proof of the evaluation of several polynomials on several points.
+
+- nonzero_length: length of G
+- max_rounds: number of rounds after padding G to the next power of 2
+- padded_length = the next power of 2
+
+- points = [h, g, padding to make g of size the next power of 2]
+- scalars = [0...] same length as points
+
+- rand_base ->
+- sg_rand_base -> both used for batch verification
+
+- for every proof do:
+    - compute result of inner product (the linearized evaluations $f(x_1) + v \cdot g(x_1) + u \cdot (f(x_2) + v \cdot g(x_2))$)
+    - with the Fq-Sponge use absorb_fr to absorb the result of the inner product
+    - produce challenge t (in Fq) with the Fq-sponge
+    - use group_map to derive u (a curve point) from t
+    - 
+
+- check that (MSM) $$<\vec scalars, \vec points> = O$$ the point at infinity
+
+
+- where do we check the commitment shifted stuff? It's not clear to me
+
+
+---
+
+combined_inner_product::<G>(evaluation_points, xi, r, &evals, self.g.len())
+
+///  ---------------------------------------
+/// |    | t_lo      | t_mid      | t_hi    |
+/// | ---------------------------------------
+/// | x1 | t_lo(x1)  | t_mid(x1) | t_hi(x1) |
+/// | ---------------------------------------
+/// | x2 | t_lo(x2)  | t_mid(x2) | t_hi(x2) |
+/// ----------------------------------------
+
+we want t(x_1) = t_lo(x_1) + t_mod(x_1) x_1^n + t_hi(x_1) x_1^{2n}
+
+so we calculate
+
+we want [t_lo(x_1), t_mod(x_1) x_1^n, t_hi(x_1) x_1^{2n}]
+
