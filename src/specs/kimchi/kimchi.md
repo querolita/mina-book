@@ -1,8 +1,8 @@
-# 15-wires
+# kimchi
 
 **THIS IS WORK-IN-PROGRESS**
 
-This document specifies the 15-wires variant of PLONK.
+This document specifies the kimchi variant of PLONK.
 
 ## Overview
 

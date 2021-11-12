@@ -31,5 +31,5 @@
 - [Non-interaction with fiat-shamir](./crypto/plonk/fiat_shamir.md)
 - [Alternative zero-knowledge](./crypto/plonk/zkpm.md)
 - [Maller's optimization](./crypto/plonk/maller.md)
-  - [Maller's optimization for 15-wires](./crypto/plonk/maller_15.md)
+  - [Maller's optimization for kimchi](./crypto/plonk/maller_15.md)
 - [Final check](./crypto/plonk/final_check.md)
