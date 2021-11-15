@@ -11,7 +11,7 @@
   - [EC addition]()
   - [EC scalar multiplication]()
   - [Poseidon](./specs/kimchi/poseidon.md)
-  - [Endo scalar multiplication]()
+  - [Endo scalar multiplication](./specs/kimchi/endoscalar_multiplication.md)
   - [Endo scalar]()
   - [ChaCha20](./specs/kimchi/chacha20.md)
   - [Plookup](./specs/kimchi/plookup.md)
