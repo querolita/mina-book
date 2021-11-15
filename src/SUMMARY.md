@@ -15,6 +15,8 @@
   - [Endo scalar]()
   - [ChaCha20](./specs/kimchi/chacha20.md)
   - [Plookup](./specs/kimchi/plookup.md)
+- [Pickles](./specs/pickles/pickles.md)
+  - [Overview](./specs/pickles/overview.md)
 - [Poseidon hash](./specs/poseidon.md)
 - [Pasta curves](./specs/pasta_curves.md)
 - [Consensus]()
