@@ -9,4 +9,4 @@ title = "Mina Protocol"
 
 [output.html]
 curly-quotes = true
-git-repository-url = "https://www.github.com/mimoo/minaprotocol"
+git-repository-url = "https://www.github.com/o1-labs/mina-book"
