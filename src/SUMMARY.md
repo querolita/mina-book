@@ -30,6 +30,7 @@
 - [Lagrange basis in multiplicative subgroups](./crypto/plonk/lagrange.md)
 - [Non-interaction with fiat-shamir](./crypto/plonk/fiat_shamir.md)
 - [Alternative zero-knowledge](./crypto/plonk/zkpm.md)
+- [Plookup](./crypto/plonk/plookup.md)
 - [Maller's optimization](./crypto/plonk/maller.md)
   - [Maller's optimization for kimchi](./crypto/plonk/maller_15.md)
 - [Final check](./crypto/plonk/final_check.md)
